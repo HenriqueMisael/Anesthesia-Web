@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreatePatientBusiness extends CreateModelBusiness<PatientModel> {
+public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
 
     private CpfValidator cpfValidator;
     private NameNotNullValidator nameNotNullValidator;
     private SurnameNotNullValidator surnameNotNullValidator;
 
     @Autowired
-    public CreatePatientBusiness(PatientRepository patientRepository, CpfValidator cpfValidator, NameNotNullValidator nameNotNullValidator, SurnameNotNullValidator surnameNotNullValidator) {
+    public SavePatientBusiness(PatientRepository patientRepository, CpfValidator cpfValidator, NameNotNullValidator nameNotNullValidator, SurnameNotNullValidator surnameNotNullValidator) {
         super(patientRepository);
         this.cpfValidator = cpfValidator;
         this.nameNotNullValidator = nameNotNullValidator;

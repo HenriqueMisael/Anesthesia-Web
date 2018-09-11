@@ -27,7 +27,7 @@ public class CreatePatientBusinessTest {
     @Mock
     private SurnameNotNullValidator surnameNotNullValidator;
     @InjectMocks
-    private CreatePatientBusiness createPatientBusiness;
+    private SavePatientBusiness createPatientBusiness;
 
     @Before
     public void before() {

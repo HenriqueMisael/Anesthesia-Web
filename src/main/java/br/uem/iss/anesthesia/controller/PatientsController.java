@@ -1,6 +1,6 @@
 package br.uem.iss.anesthesia.controller;
 
-import br.uem.iss.anesthesia.model.business.CreatePatientBusiness;
+import br.uem.iss.anesthesia.model.business.SavePatientBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.entity.PatientModel;
 import br.uem.iss.anesthesia.model.repository.PatientRepository;
@@ -24,7 +24,7 @@ public class PatientsController {
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
-    private CreatePatientBusiness createPatientBusiness;
+    private SavePatientBusiness createPatientBusiness;
 
     @GetMapping("/patients")
     public ModelAndView listPatients() {

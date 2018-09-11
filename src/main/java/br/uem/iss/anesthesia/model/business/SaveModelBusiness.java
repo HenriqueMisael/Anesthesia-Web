@@ -7,11 +7,11 @@ import br.uem.iss.anesthesia.model.business.exception.NullContentNotAllowedExcep
 import br.uem.iss.anesthesia.model.entity.DefaultModel;
 import org.springframework.data.repository.CrudRepository;
 
-public abstract class CreateModelBusiness<T extends DefaultModel> {
+public abstract class SaveModelBusiness<T extends DefaultModel> {
 
     private final CrudRepository<T, Long> repository;
 
-    public CreateModelBusiness(CrudRepository repository) {
+    public SaveModelBusiness(CrudRepository repository) {
         this.repository = repository;
     }
 
