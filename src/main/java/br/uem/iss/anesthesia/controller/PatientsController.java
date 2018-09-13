@@ -44,7 +44,7 @@ public class PatientsController {
     @PostMapping("/patient")
     public String savePatient(@Valid PatientModel patient, BindingResult result, RedirectAttributes attributes) {
         try {
-            createPatientBusiness.create(patient);
+            createPatientBusiness.save(patient);
             return "redirect:/patients";
         } catch (BusinessRuleException e) {
             attributes.addFlashAttribute("message", e.getMessage());

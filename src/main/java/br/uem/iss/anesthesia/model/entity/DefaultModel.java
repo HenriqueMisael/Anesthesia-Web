@@ -26,4 +26,8 @@ public class DefaultModel implements Serializable, Cloneable {
         clone.setId(id);
         return clone;
     }
+
+    public boolean isNew() {
+        return id == null;
+    }
 }
