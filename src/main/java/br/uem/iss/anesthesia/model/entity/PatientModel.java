@@ -2,8 +2,7 @@ package br.uem.iss.anesthesia.model.entity;
 
 import br.uem.iss.anesthesia.model.entity.embedded.Address;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "Patients")
 public class PatientModel extends DefaultModel {
 
     private String name;
@@ -19,6 +19,7 @@ public class PatientModel extends DefaultModel {
     private LocalDate birthday;
     private String religion;
     private CivilState civilState;
+    @ManyToOne
     private CityModel city;
     private String postalCode;
     @Embedded
@@ -28,7 +29,9 @@ public class PatientModel extends DefaultModel {
     private String email;
     private String cpf;
     private String rg;
+    @ManyToMany
     private List<BackgroundModel> backgrounds;
+    @ManyToMany
     private List<MedicineModel> medicines;
 
     public String getName() {

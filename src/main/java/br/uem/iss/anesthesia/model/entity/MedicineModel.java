@@ -1,9 +1,11 @@
 package br.uem.iss.anesthesia.model.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
+@Table(name = "Medicines")
 public class MedicineModel extends DefaultModel {
 
     private String name;
