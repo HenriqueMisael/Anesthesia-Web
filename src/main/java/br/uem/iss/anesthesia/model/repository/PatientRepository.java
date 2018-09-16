@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PatientRepository extends CrudRepository<PatientModel, Long> {
 
+    Iterable<PatientModel> findByActiveTrue();
 }

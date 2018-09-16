@@ -1,13 +1,12 @@
 package br.uem.iss.anesthesia.model.entity;
 
-import br.uem.iss.anesthesia.model.entity.embedded.Address;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Patients")
@@ -23,16 +22,18 @@ public class PatientModel extends DefaultModel {
     private CityModel city;
     private String postalCode;
     @Embedded
-    private Address address;
+    private String address;
     private String phoneNumber;
     private String cellphoneNumber;
     private String email;
     private String cpf;
     private String rg;
-    @ManyToMany
-    private List<BackgroundModel> backgrounds;
-    @ManyToMany
-    private List<MedicineModel> medicines;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<BackgroundModel> backgrounds;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<MedicineModel> medicines;
+    @ColumnDefault("true")
+    private boolean active;
 
     public String getName() {
         return name;
@@ -106,11 +107,11 @@ public class PatientModel extends DefaultModel {
         this.postalCode = postalCode;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -146,20 +147,32 @@ public class PatientModel extends DefaultModel {
         this.rg = rg;
     }
 
-    public List<BackgroundModel> getBackgrounds() {
+    public Set<BackgroundModel> getBackgrounds() {
         return backgrounds;
     }
 
-    public void setBackgrounds(List<BackgroundModel> backgrounds) {
+    public void setBackgrounds(Set<BackgroundModel> backgrounds) {
         this.backgrounds = backgrounds;
     }
 
-    public List<MedicineModel> getMedicines() {
+    public Set<MedicineModel> getMedicines() {
         return medicines;
     }
 
-    public void setMedicines(List<MedicineModel> medicines) {
+    public void setMedicines(Set<MedicineModel> medicines) {
         this.medicines = medicines;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void inactivate() {
+        active = false;
+    }
+
+    public void activate() {
+        active = true;
     }
 
     @Override
@@ -179,11 +192,10 @@ public class PatientModel extends DefaultModel {
 
     @Override
     protected PatientModel clone() throws CloneNotSupportedException {
-        List<BackgroundModel> clonedBackgrounds = new ArrayList<>();
-        Collections.copy(clonedBackgrounds, getBackgrounds());
-        List<MedicineModel> clonedMedicines = new ArrayList<>();
-        Collections.copy(clonedMedicines, getMedicines());
-
+        Set<BackgroundModel> clonedBackgrounds = new HashSet<>();
+        copy(clonedBackgrounds, getBackgrounds());
+        Set<MedicineModel> clonedMedicines = new HashSet<>();
+        copy(clonedMedicines, getMedicines());
         PatientModel clone = (PatientModel) super.clone();
         clone.setName(getName());
         clone.setSurname(getSurname());
@@ -201,7 +213,12 @@ public class PatientModel extends DefaultModel {
         clone.setRg(getRg());
         clone.setBackgrounds(clonedBackgrounds);
         clone.setMedicines(clonedMedicines);
-
         return clone;
+    }
+
+    private void copy(Set target, Set source) {
+        for (Object o : source) {
+            target.add(o);
+        }
     }
 }

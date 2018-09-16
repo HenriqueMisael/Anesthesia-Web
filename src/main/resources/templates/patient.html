@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Anesthesia - Cadastro de Pacientes</title>
 
@@ -11,27 +11,92 @@
 <body>
 <h1>Anesthesia</h1>
 <h2>Cadastro de Pacientes</h2>
-<div class="card-panel red white-text">
-    <label name="message"></label>
-</div>
-<form class="container" method="post">
+<th:block th:include="message"></th:block>
+<form class="container" action="#" th:action="@{/patient}" th:object="${patient}" method="post">
     <div class="row">
-        <label>
-            Nome<input type="text" value="" name="name"/>
-        </label>
-        <label>
-            Sobrenome<input type="text" value="" name="surname"/>
-        </label>
-        <label>
-            Cpf<input type="text" value="" name="cpf"/>
-        </label>
+        <div class="input-field col s6">
+            <input id="name" th:field="*{name}" type="text">
+            <label for="name">Nome</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="surname" th:field="*{surname}" type="text">
+            <label for="surname">Sobrenome</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s2">
+            <select id="gender" th:field="*{gender}">
+                <option th:each="genderOption : ${genderOptions}" th:value="${genderOption}" th:text="${genderOption}">
+                </option>
+            </select>
+            <label for="gender">Sexo</label>
+        </div>
+        <div class="input-field col s2">
+            <input id="birthday" th:field="*{birthday}" type="text" class="datepicker">
+            <label for="birthday">Data de Nascimento</label>
+        </div>
+        <div class="input-field col s5">
+            <input id="religion" th:field="*{religion}" type="text">
+            <label for="religion">Religião</label>
+        </div>
+        <div class="input-field col s3">
+            <select id="civilState" th:field="*{civilState}">
+                <option th:each="civilStateOption : ${civilStateOptions}" th:value="${civilStateOption}"
+                        th:text="${civilStateOption}">
+                </option>
+            </select>
+            <label for="civilState">Estado Civil</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s3">
+            <input id="city" th:field="*{city.name}" type="text">
+            <label for="city">Cidade</label>
+        </div>
+        <div class="input-field col s2">
+            <input id="uf" th:field="*{city.uf}" type="text">
+            <label for="uf">Unidade Federativa</label>
+        </div>
+        <div class="input-field col s2">
+            <input id="uf" th:field="*{city.uf}" type="text">
+            <label for="uf">Unidade Federativa</label>
+        </div>
+        <div class="input-field col s2">
+            <input id="cpf" th:field="*{cpf}" type="text">
+            <label for="cpf">CPF</label>
+        </div>
     </div>
     <button class="waves-effect waves-light btn" type="submit">Salvar
         <i class="material-icons right">send</i>
     </button>
     <a href="/patients" class="waves-effect waves-light btn">Voltar</a>
 </form>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var datePickerElements = document.querySelectorAll('.datepicker');
+        var datePickerOptions = {
+            container: 'body',
+            showDaysInNextAndPreviousMonths: true,
+            format: "dd/mm/yyyy",
+            i18n: {
+                today: 'Hoje',
+                clear: 'Limpar',
+                done: 'Ok',
+                nextMonth: 'Próximo mês',
+                previousMonth: 'Mês anterior',
+                weekdaysAbbrev: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                weekdays: ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
+                monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+            }
+        }
+        M.Datepicker.init(datePickerElements, datePickerOptions);
 
+        var elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems, {});
+    });
+</script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>

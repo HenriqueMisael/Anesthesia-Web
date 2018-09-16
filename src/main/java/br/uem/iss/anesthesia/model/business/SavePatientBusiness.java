@@ -48,7 +48,7 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
     }
 
     private void saveIfNew(SaveModelBusiness saveModelBusiness, DefaultModel model) throws BusinessRuleException {
-        if (model.isNew()) {
+        if (model != null && model.isNew()) {
             saveModelBusiness.save(model);
         }
     }

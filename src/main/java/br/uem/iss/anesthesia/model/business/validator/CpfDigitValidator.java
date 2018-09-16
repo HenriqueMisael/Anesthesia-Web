@@ -8,8 +8,7 @@ public class CpfDigitValidator {
 
     public void validate(String cpf, int digit) throws InvalidCpfContentException {
         int sum = getSumByDigit(cpf, digit);
-        Integer resultExpected = Integer.valueOf(cpf.substring(9, 10));
-        validateDigit(sum, resultExpected);
+        validateDigit(sum, Integer.valueOf(cpf.substring(8 + digit, 9 + digit)));
     }
 
     private int getSumByDigit(String cpf, int digit) {

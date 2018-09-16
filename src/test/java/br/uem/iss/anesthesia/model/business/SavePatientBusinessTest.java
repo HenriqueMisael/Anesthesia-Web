@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static java.util.Arrays.asList;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -48,7 +47,7 @@ public class SavePatientBusinessTest extends UnitTest {
     @Mock
     private SaveMedicineBusiness saveMedicineBusiness;
     @InjectMocks
-    private SavePatientBusiness createPatientBusiness;
+    private SavePatientBusiness savePatientBusiness;
 
     @Override
     public void before() {
@@ -60,11 +59,11 @@ public class SavePatientBusinessTest extends UnitTest {
     }
 
     @Test
-    public void happyDayNewCity() throws BusinessRuleException {
+    public void allFieldsNewCity() throws BusinessRuleException {
         mockPatient();
         doReturn(true).when(city).isNew();
-        doReturn(asList(newBackground, persistedBackground)).when(patientModel).getBackgrounds();
-        doReturn(asList(newMedicine, persistedMedicine)).when(patientModel).getMedicines();
+        doReturn(asSet(newBackground, persistedBackground)).when(patientModel).getBackgrounds();
+        doReturn(asSet(newMedicine, persistedMedicine)).when(patientModel).getMedicines();
         save(patientModel);
         verify(saveCityBusiness).save(patientModel.getCity());
         verify(saveBackgroundBusiness).save(newBackground);
@@ -72,7 +71,7 @@ public class SavePatientBusinessTest extends UnitTest {
     }
 
     @Test
-    public void happyDayPersistedCity() throws BusinessRuleException {
+    public void essentialFieldsPersistedCity() throws BusinessRuleException {
         mockPatient();
         doReturn(false).when(city).isNew();
         save(patientModel);
@@ -86,7 +85,7 @@ public class SavePatientBusinessTest extends UnitTest {
     }
 
     private void save(PatientModel patientModel) throws BusinessRuleException {
-        createPatientBusiness.save(patientModel);
+        savePatientBusiness.save(patientModel);
         verify(cpfValidator).validate(patientModel.getCpf());
         verify(nameNotNullValidator).validate(patientModel.getName());
         verify(surnameNotNullValidator).validate(patientModel.getSurname());
