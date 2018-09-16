@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Anesthesia</title>
+    <th:block th:include="layouts/_css"></th:block>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <header th:include="layouts/_header">
+        <span>O header será inserido aqui!</span>
+    </header>
+    <main>
+        <div th:include="${conteudo} :: corpo">
+            <span>O conteúdo da página será inserido aqui</span>
+        </div>
+    </main>
+    <footer class="page-footer blue" th:include="layouts/_footer">
+        <span>O rodapé será inserido aqui!</span>
+    </footer>
+<th:block th:include="layouts/_scripts"></th:block>
+</body>

@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Médicos</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb">Cadastro de Médicos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>CRM</th>
+                    <th>Nome</th>
+                    <th><a href="" class="btn-floating btn-small waves-effect waves-light blue"><i
+                            class="material-icons">add</i></a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="doctor : ${doctors}">
+                    <td><span th:text="${doctor.id}"></span></td>
+                    <td><span th:text="${doctor.CRM}"></span></td>
+                    <td><span th:text="${doctor.nome}"></span></td>
+                    <td>
+                        <!--<a class="btn-floating btn-small waves-effect waves-light blue"-->
+                        <!--th:href="${(#mvc.url('PC#deletePatient').arg(0, patient.id)).build()}"><i-->
+                        <!--class="material-icons">delete</i></a>-->
+                        <!--<a class="btn-floating btn-small waves-effect waves-light blue"-->
+                        <!--th:href="${(#mvc.url('PC#editPatient').arg(0, patient.id)).build()}"><i-->
+                        <!--class="material-icons">edit</i></a>-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</html>

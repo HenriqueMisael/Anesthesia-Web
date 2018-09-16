@@ -9,11 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class PatientView extends ModelAndView {
 
     public PatientView(PatientModel patient, String message, Iterable<CityModel> cityOptions, Iterable<String> ufOptions, Gender[] genderOptions, CivilState[] civilStatesOptions) {
-        super("form_patient", "patient", patient);
+        super("layouts/app", "patient", patient);
         this.addObject("message", message);
         this.addObject("genderOptions", genderOptions);
         this.addObject("civilStateOptions", civilStatesOptions);
         this.addObject("cityOptions", cityOptions);
         this.addObject("ufOptions", ufOptions);
+        this.addObject("conteudo", "form_patient");
     }
 }
