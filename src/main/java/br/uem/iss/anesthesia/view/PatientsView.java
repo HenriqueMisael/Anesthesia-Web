@@ -6,6 +6,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class PatientsView extends ModelAndView {
 
     public PatientsView(Iterable<PatientModel> patients) {
-        super("patients", "patients", patients);
+        super("index_patient", "patients", patients);
     }
 }
