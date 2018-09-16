@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @Controller
 @RequestMapping("/patient")
@@ -73,7 +72,7 @@ public class PatientsController {
 
     private PatientView viewWithMessage(PatientModel patient, String message) {
         Iterable<CityModel> cityOptions = cityRepository.findAll();
-        List<String> ufOptions = asList();
+        List<String> ufOptions = new ArrayList<>();
         for (CityModel cityModel : cityOptions) {
             String uf = cityModel.getUf();
             if (!ufOptions.contains(uf)) {

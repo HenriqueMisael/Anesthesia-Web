@@ -46,25 +46,34 @@ public class SavePatientBusinessTest extends UnitTest {
     private SaveBackgroundBusiness saveBackgroundBusiness;
     @Mock
     private SaveMedicineBusiness saveMedicineBusiness;
+    @Mock
+    private ModelNoveltyChecker modelNoveltyChecker;
     @InjectMocks
     private SavePatientBusiness savePatientBusiness;
 
     @Override
     public void before() {
         super.before();
-        doReturn(true).when(newBackground).isNew();
-        doReturn(true).when(newMedicine).isNew();
-        doReturn(false).when(persistedBackground).isNew();
-        doReturn(false).when(persistedMedicine).isNew();
+        doReturn(true).when(modelNoveltyChecker).check(newBackground);
+        doReturn(true).when(modelNoveltyChecker).check(newMedicine);
+        doReturn(false).when(modelNoveltyChecker).check(persistedBackground);
+        doReturn(false).when(modelNoveltyChecker).check(persistedMedicine);
     }
 
     @Test
     public void allFieldsNewCity() throws BusinessRuleException {
         mockPatient();
-        doReturn(true).when(city).isNew();
+        doReturn(true).when(modelNoveltyChecker).check(city);
         doReturn(asSet(newBackground, persistedBackground)).when(patientModel).getBackgrounds();
         doReturn(asSet(newMedicine, persistedMedicine)).when(patientModel).getMedicines();
         save(patientModel);
+        verify(modelNoveltyChecker).check(patientModel.getCity());
+        for (BackgroundModel background : patientModel.getBackgrounds()) {
+            verify(modelNoveltyChecker).check(background);
+        }
+        for (MedicineModel medicine : patientModel.getMedicines()) {
+            verify(modelNoveltyChecker).check(medicine);
+        }
         verify(saveCityBusiness).save(patientModel.getCity());
         verify(saveBackgroundBusiness).save(newBackground);
         verify(saveMedicineBusiness).save(newMedicine);
@@ -73,7 +82,7 @@ public class SavePatientBusinessTest extends UnitTest {
     @Test
     public void essentialFieldsPersistedCity() throws BusinessRuleException {
         mockPatient();
-        doReturn(false).when(city).isNew();
+        doReturn(false).when(modelNoveltyChecker).check(city);
         save(patientModel);
     }
 

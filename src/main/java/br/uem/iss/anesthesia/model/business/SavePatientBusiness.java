@@ -8,7 +8,6 @@ import br.uem.iss.anesthesia.model.business.validator.CpfValidator;
 import br.uem.iss.anesthesia.model.business.validator.NameNotNullValidator;
 import br.uem.iss.anesthesia.model.business.validator.SurnameNotNullValidator;
 import br.uem.iss.anesthesia.model.entity.BackgroundModel;
-import br.uem.iss.anesthesia.model.entity.DefaultModel;
 import br.uem.iss.anesthesia.model.entity.MedicineModel;
 import br.uem.iss.anesthesia.model.entity.PatientModel;
 import br.uem.iss.anesthesia.model.repository.PatientRepository;
@@ -24,9 +23,10 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
     private SaveCityBusiness saveCityBusiness;
     private SaveBackgroundBusiness saveBackgroundBusiness;
     private SaveMedicineBusiness saveMedicineBusiness;
+    private ModelNoveltyChecker modelNoveltyChecker;
 
     @Autowired
-    public SavePatientBusiness(PatientRepository patientRepository, CpfValidator cpfValidator, NameNotNullValidator nameNotNullValidator, SurnameNotNullValidator surnameNotNullValidator, SaveCityBusiness saveCityBusiness, SaveBackgroundBusiness saveBackgroundBusiness, SaveMedicineBusiness saveMedicineBusiness) {
+    public SavePatientBusiness(PatientRepository patientRepository, CpfValidator cpfValidator, NameNotNullValidator nameNotNullValidator, SurnameNotNullValidator surnameNotNullValidator, SaveCityBusiness saveCityBusiness, SaveBackgroundBusiness saveBackgroundBusiness, SaveMedicineBusiness saveMedicineBusiness, ModelNoveltyChecker modelNoveltyChecker) {
         super(patientRepository);
         this.cpfValidator = cpfValidator;
         this.nameNotNullValidator = nameNotNullValidator;
@@ -34,22 +34,27 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
         this.saveCityBusiness = saveCityBusiness;
         this.saveBackgroundBusiness = saveBackgroundBusiness;
         this.saveMedicineBusiness = saveMedicineBusiness;
+        this.modelNoveltyChecker = modelNoveltyChecker;
     }
 
     @Override
     protected void saveDependencies(PatientModel model) throws BusinessRuleException {
-        saveIfNew(saveCityBusiness, model.getCity());
-        for (BackgroundModel background : model.getBackgrounds()) {
-            saveIfNew(saveBackgroundBusiness, background);
+        if (modelNoveltyChecker.check(model.getCity())) {
+            saveCityBusiness.save(model.getCity());
         }
-        for (MedicineModel medicine : model.getMedicines()) {
-            saveIfNew(saveMedicineBusiness, medicine);
+        if (model.getBackgrounds() != null) {
+            for (BackgroundModel item : model.getBackgrounds()) {
+                if (modelNoveltyChecker.check(item)) {
+                    saveBackgroundBusiness.save(item);
+                }
+            }
         }
-    }
-
-    private void saveIfNew(SaveModelBusiness saveModelBusiness, DefaultModel model) throws BusinessRuleException {
-        if (model != null && model.isNew()) {
-            saveModelBusiness.save(model);
+        if (model.getMedicines() != null) {
+            for (MedicineModel item : model.getMedicines()) {
+                if (modelNoveltyChecker.check(item)) {
+                    saveMedicineBusiness.save(item);
+                }
+            }
         }
     }
 

@@ -1,7 +1,5 @@
 package br.uem.iss.anesthesia.model.entity;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -32,8 +30,7 @@ public class PatientModel extends DefaultModel {
     private Set<BackgroundModel> backgrounds;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<MedicineModel> medicines;
-    @ColumnDefault("true")
-    private boolean active;
+    private boolean active = true;
 
     public String getName() {
         return name;
