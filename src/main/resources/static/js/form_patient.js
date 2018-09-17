@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
             months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
         }
-    }
+    };
     M.Datepicker.init(datePickerElements, datePickerOptions);
 
     var selectElements = document.querySelectorAll('select');
@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
     /*]]>*/
     var cityAutocomplete = document.querySelector("#city");
     M.Autocomplete.init(cityAutocomplete, {
-        data: cityOptions
+        data: {
+            'Maringa': null
+        }
     });
     var ufAutocomplete = document.querySelector("#uf");
     M.Autocomplete.init(ufAutocomplete, {
