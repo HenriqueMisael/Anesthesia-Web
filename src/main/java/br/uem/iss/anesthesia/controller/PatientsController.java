@@ -31,8 +31,18 @@ public class PatientsController {
     private SavePatientBusiness savePatientBusiness;
 
     @GetMapping
-    public ModelAndView listPatients() {
-        return new PatientsView(patientRepository.findByActiveTrue());
+    public ModelAndView listPatients(@RequestParam(value = "cpf", required = false) String cpf, @RequestParam(value = "name", required = false) String name) {
+        Iterable<PatientModel> patients;
+        if (cpf != null && name != null) {
+            patients = patientRepository.findByCpfContainingAndNameContainingAndActiveTrue(cpf, name);
+        } else if (cpf != null) {
+            patients = patientRepository.findByCpfContainingAndActiveTrue(cpf);
+        } else if (name != null) {
+            patients = patientRepository.findByNameContainingAndActiveTrue(name);
+        } else {
+            patients = patientRepository.findByActiveTrue();
+        }
+        return new PatientsView(patients);
     }
 
     @GetMapping("/new")
@@ -49,7 +59,7 @@ public class PatientsController {
     public ModelAndView savePatient(@Valid PatientModel patient) {
         try {
             savePatientBusiness.save(patient);
-            return listPatients();
+            return listPatients(null, null);
         } catch (BusinessRuleException e) {
             return viewWithMessage(patient, e.getMessage());
         }
@@ -63,7 +73,7 @@ public class PatientsController {
             savePatientBusiness.save(patient);
         } catch (BusinessRuleException e) {
         }
-        return listPatients();
+        return listPatients(null, null);
     }
 
     private PatientView viewWithoutMessage(PatientModel patient) {

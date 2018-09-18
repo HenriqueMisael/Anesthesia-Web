@@ -8,4 +8,10 @@ import org.springframework.stereotype.Repository;
 public interface PatientRepository extends CrudRepository<PatientModel, Long> {
 
     Iterable<PatientModel> findByActiveTrue();
+
+    Iterable<PatientModel> findByCpfContainingAndActiveTrue(String cpf);
+
+    Iterable<PatientModel> findByNameContainingAndActiveTrue(String name);
+
+    Iterable<PatientModel> findByCpfContainingAndNameContainingAndActiveTrue(String cpf, String name);
 }
