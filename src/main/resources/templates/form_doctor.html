@@ -1,0 +1,196 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Médicos</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb" th:href="@{/doctor}">Cadastro de Médicos</a>
+                            <a class="breadcrumb" th:text="${metodo} + Médicos"></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!--<th:block th:include="message"></th:block>-->
+            <form action="#" th:action="@{/doctor}" th:object="${doctor}" method="POST">
+                <input id="id" th:field="*{id}" type="hidden">
+                <div class="row">
+                    <div class="input-field col s2">
+                        <select id="active" th:field="*{active}">
+                            <option value="1" selected>Sim</option>
+                            <option value="0">Não</option>
+                        </select>
+                        <label for="active">Ativo</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="name" th:field="*{name}" type="text">
+                        <label for="name">Nome</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="crm" th:field="*{CRM}" type="text">
+                        <label for="crm">CRM</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-content white-text">
+                                <span class="card-title blue-text text-darken-2">Segunda-Feira</span>
+                            </div>
+                            <div class="card-action">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{segundaManha}" class="filled-in" />
+                                        <span>Manhã</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{segundaTarde}" class="filled-in"/>
+                                        <span>Tarde</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-content white-text">
+                                <span class="card-title blue-text text-darken-2">Terça-Feira</span>
+                            </div>
+                            <div class="card-action">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{tercaManha}" class="filled-in" />
+                                        <span>Manhã</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{tercaTarde}" class="filled-in"/>
+                                        <span>Tarde</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-content white-text">
+                                <span class="card-title blue-text text-darken-2">Quarta-Feira</span>
+                            </div>
+                            <div class="card-action">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{quartaManha}" class="filled-in" />
+                                        <span>Manhã</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{quartaTarde}" class="filled-in"/>
+                                        <span>Tarde</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-content white-text">
+                                <span class="card-title blue-text text-darken-2">Quinta-Feira</span>
+                            </div>
+                            <div class="card-action">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{quintaManha}" class="filled-in" />
+                                        <span>Manhã</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{quintaTarde}" class="filled-in"/>
+                                        <span>Tarde</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-content white-text">
+                                <span class="card-title blue-text text-darken-2">Sexta-Feira</span>
+                            </div>
+                            <div class="card-action">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{sextaManha}" class="filled-in" />
+                                        <span>Manhã</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{sextaTarde}" class="filled-in"/>
+                                        <span>Tarde</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-content white-text">
+                                <span class="card-title blue-text text-darken-2">Sábado</span>
+                            </div>
+                            <div class="card-action">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{sabadoManha}" class="filled-in" />
+                                        <span>Manhã</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{sabadoTarde}" class="filled-in"/>
+                                        <span>Tarde</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-content white-text">
+                                <span class="card-title blue-text text-darken-2">Domingo</span>
+                            </div>
+                            <div class="card-action">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{domingoManha}" class="filled-in" />
+                                        <span>Manhã</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:field="*{domingoTarde}" class="filled-in"/>
+                                        <span>Tarde</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="waves-effect waves-light btn" type="submit">Salvar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a href="/doctor" class="waves-effect waves-light btn">Voltar</a>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
