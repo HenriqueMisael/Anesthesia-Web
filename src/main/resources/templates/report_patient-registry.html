@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha de Paciente</title>
+    <style>
+        h1 {
+            color: #0D47A1;
+            font-family: Calibri;
+            font-size: 60px;
+        }
+
+        h2 {
+            color: black;;
+            font-family: Times;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        span {
+            display: block;
+        }
+
+        .field > span:nth-child(1) {
+            color: #0D47A1;
+            font-family: Calibri;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .field > span:nth-child(2) {
+            color: black;
+            font-family: Times;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body onload="window.print()">
+<h1>Ficha de Paciente</h1>
+<h2>Pessoal</h2>
+<div class="field">
+    <span>Nome</span>
+    <span th:text="${patient.name + ' ' + patient.surname}"></span>
+</div>
+<div class="field">
+    <span>Data de Nasicmento</span>
+    <span th:text="${patient.birthday}"></span>
+</div>
+<div class="field">
+    <span>Data de Sexo</span>
+    <span th:text="${patient.gender}"></span>
+</div>
+<div class="field">
+    <span>Religião</span>
+    <span th:text="${patient.religion}"></span>
+</div>
+<div class="field">
+    <span>Estado Civil</span>
+    <span th:text="${patient.civilState}"></span>
+</div>
+<div class="field">
+    <span>CPF</span>
+    <span th:text="${patient.cpf}"></span>
+</div>
+<h2>Endereço</h2>
+<div class="field">
+    <span>Cidade</span>
+    <span th:text="${patient.city}"></span>
+</div>
+<div class="field">
+    <span>Endereço</span>
+    <span th:text="${patient.address}"></span>
+</div>
+<h2>Contato</h2>
+<div class="field">
+    <span>Telefone Residencial</span>
+    <span th:text="${patient.phoneNumber}"></span>
+</div>
+<div class="field">
+    <span>Telefone Celular</span>
+    <span th:text="${patient.cellphoneNumber}"></span>
+</div>
+<div class="field">
+    <span>Email</span>
+    <span th:text="${patient.email}"></span>
+</div>
+</body>
+</html>
