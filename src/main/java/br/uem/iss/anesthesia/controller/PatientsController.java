@@ -12,10 +12,14 @@ import br.uem.iss.anesthesia.view.PatientView;
 import br.uem.iss.anesthesia.view.PatientsView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +78,24 @@ public class PatientsController {
         } catch (BusinessRuleException e) {
         }
         return listPatients(null, null);
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                setValue(LocalDate.parse(text, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            }
+
+            @Override
+            public String getAsText() throws IllegalArgumentException {
+                if (getValue() == null) {
+                    return null;
+                }
+                return DateTimeFormatter.ofPattern("dd/MM/yyyy").format((LocalDate) getValue());
+            }
+        });
     }
 
     private PatientView viewWithoutMessage(PatientModel patient) {
