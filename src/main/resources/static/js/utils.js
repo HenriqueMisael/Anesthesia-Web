@@ -87,3 +87,23 @@ function ativaTooltip(){
         var instances = M.Tooltip.init(elems, {position: 'top'});
     });
 }
+
+
+$.validator.setDefaults({
+    errorClass: 'invalid',
+    validClass: "valid",
+    errorPlacement: function(error, element) {
+        $(element)
+            .closest("form")
+            .find("label[for='" + element.attr("id") + "']")
+            .parent()
+            .find('span')
+            .remove();
+        $(element)
+            .closest("form")
+            .find("label[for='" + element.attr("id") + "']")
+            .after('<span class="helper-text" data-error="'+ error.text() +'" ></span>')
+    },
+    submitHandler: function(form) {
+    }
+});

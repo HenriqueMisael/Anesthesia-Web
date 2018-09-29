@@ -6,8 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class DoctorIndexView extends ModelAndView {
 
-    public DoctorIndexView(Iterable<DoctorModel> doctors){
+    public DoctorIndexView(Iterable<DoctorModel> doctors, String name, String crm){
         super("layouts/app", "doctors", doctors);
         this.addObject("conteudo", "index_doctor");
+        this.addObject("filtro_name", name);
+        this.addObject("filtro_crm", crm);
     }
 }

@@ -19,7 +19,7 @@
                 <input id="id" th:field="*{id}" type="hidden">
                 <div class="row">
                     <div class="input-field col s2">
-                        <select id="active" th:field="*{active}">
+                        <select id="active" th:field="*{active}" required>
                             <option value="1" selected>Sim</option>
                             <option value="0">Não</option>
                         </select>
@@ -28,15 +28,16 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="name" th:field="*{name}" type="text">
+                        <input id="name" th:field="*{name}" type="text" required>
                         <label for="name">Nome</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="crm" th:field="*{CRM}" type="text">
+                        <input id="crm" th:field="*{crm}" type="text" required>
                         <label for="crm">CRM</label>
                     </div>
                 </div>
-                <div class="row">
+                <span class="erro_atendimento" style="color: #F44336" hidden>Por favor, preencha um dia de atendimento</span>
+                <div class="row" id="dias_atendimento">
                     <div class="col s12 m3">
                         <div class="card">
                             <div class="card-content white-text">
@@ -185,7 +186,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="waves-effect waves-light btn" type="submit">Salvar
+                <button class="waves-effect waves-light btn" type="button" onclick="validaform()">Salvar
                     <i class="material-icons right">send</i>
                 </button>
                 <a href="/doctor" class="waves-effect waves-light btn">Voltar</a>

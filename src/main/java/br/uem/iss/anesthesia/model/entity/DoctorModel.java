@@ -13,7 +13,7 @@ import java.util.List;
 public class DoctorModel extends DefaultModel {
 
     private String name;
-    private String CRM;
+    private String crm;
     private boolean segundaManha;
     private boolean segundaTarde;
     private boolean tercaManha;
@@ -39,12 +39,12 @@ public class DoctorModel extends DefaultModel {
         this.name = name;
     }
 
-    public String getCRM() {
-        return CRM;
+    public String getCrm() {
+        return crm;
     }
 
-    public void setCRM(String CRM) {
-        this.CRM = CRM;
+    public void setCrm(String CRM) {
+        this.crm = CRM;
     }
 
     public boolean isActive() {
@@ -61,7 +61,7 @@ public class DoctorModel extends DefaultModel {
 
     @Override
     public String toString() {
-        return "CRM: " + this.CRM + ", Nome: " + this.name+ ", Ativo: " + this.active + ", Segunda Manhã: " + this.segundaManha
+        return "CRM: " + this.crm + ", Nome: " + this.name+ ", Ativo: " + this.active + ", Segunda Manhã: " + this.segundaManha
                 + ", Segunda Tarde: " + this.segundaTarde;
     }
 

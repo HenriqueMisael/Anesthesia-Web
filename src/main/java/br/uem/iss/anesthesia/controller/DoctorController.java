@@ -25,8 +25,18 @@ public class DoctorController {
     private SaveDoctorBusiness saveDoctorBusiness;
 
     @GetMapping
-    public ModelAndView listDoctors() {
-        return new DoctorIndexView(doctorRepository.findByActiveTrue());
+    public ModelAndView listDoctors(@RequestParam(value = "filtro_crm", required = false) String crm, @RequestParam(value = "filtro_name", required = false) String name) {
+        Iterable<DoctorModel> doctor;
+        if (crm != null && name != null) {
+            doctor = doctorRepository.findByCrmContainingAndNameContainingAndActiveTrue(crm, name);
+        } else if (crm != null) {
+            doctor = doctorRepository.findByCrmContainingAndActiveTrue(crm);
+        } else if (name != null) {
+            doctor = doctorRepository.findByNameContainingAndActiveTrue(name);
+        } else {
+            doctor = doctorRepository.findByActiveTrue();
+        }
+        return new DoctorIndexView(doctor, name, crm);
     }
 
     @GetMapping("/new")
@@ -43,7 +53,7 @@ public class DoctorController {
     public ModelAndView savePatient(@Valid DoctorModel doctor) {
         try {
             saveDoctorBusiness.save(doctor);
-            return listDoctors();
+            return listDoctors(null, null);
         } catch (BusinessRuleException e) {
             return viewWithMessage(doctor, e.getMessage());
         }
@@ -57,7 +67,7 @@ public class DoctorController {
             saveDoctorBusiness.save(doctor);
         } catch (BusinessRuleException e) {
         }
-        return new DoctorIndexView(doctorRepository.findByActiveTrue());
+        return new DoctorIndexView(doctorRepository.findByActiveTrue(), null, null);
     }
 
     private DoctorFormView viewWithoutMessage(DoctorModel doctor) {

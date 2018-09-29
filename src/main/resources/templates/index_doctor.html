@@ -13,6 +13,26 @@
                     </div>
                 </nav>
             </div>
+            <div class="row">
+                <form th:action="@{/doctor}" method="get">
+                    <div class="input-field col s3">
+                        <input id="filtro_crm" name="filtro_crm" type="text" th:value="${filtro_crm}">
+                        <label for="filtro_crm">CRM</label>
+                    </div>
+                    <div class="input-field col s7">
+                        <input id="filtro_name" name="filtro_name" type="text" th:value="${filtro_name}">
+                        <label for="filtro_name">Nome</label>
+                    </div>
+                    <div class="col s2">
+                        <div class="row">
+                            <a onclick="limparcampos()" class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-tooltip="Limpar Campos">
+                                <i class="material-icons">clear_all</i></a>
+                            <button type="submit" class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-tooltip="Pesquisar"><i
+                                    class="material-icons">search</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <table >
                 <thead>
                 <tr >
@@ -27,7 +47,7 @@
                 <tbody>
                 <tr th:each="doctor : ${doctors}">
                     <td th:text="${doctor.id}"><span></span></td>
-                    <td th:text="${doctor.CRM}"><span></span></td>
+                    <td th:text="${doctor.crm}"><span></span></td>
                     <td th:text="${doctor.name}"><span></span></td>
                     <td>
                         <a class="btn-floating btn-small waves-effect waves-light blue tooltipped"
