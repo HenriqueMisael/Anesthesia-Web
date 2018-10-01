@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Antecedentes</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb">Antecedentes</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <table class="col s6">
+                    <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Ativo</th>
+                        <th><a href="/background/new" class="btn-floating btn-small waves-effect waves-light blue"><i
+                                class="material-icons">add</i></a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="background : ${backgrounds}">
+                        <td><span th:text="${background.id}"></span></td>
+                        <td><span th:text="${background.name}"></span></td>
+                        <td><span th:text="${background.active}"></span></td>
+                        <td><a class="btn-floating btn-small waves-effect waves-light blue"
+                               th:href="${(#mvc.url('BC#editBackground').arg(0, background.id)).build()}"><i
+                                class="material-icons">edit</i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/index_background.js}"></script>
+</div>
+
+</html>

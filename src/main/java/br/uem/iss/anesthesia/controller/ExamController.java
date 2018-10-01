@@ -1,4 +1,4 @@
-package br.uem.iss.anesthesia.controller;
+/*package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SaveExamBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
@@ -63,4 +63,5 @@ public class ExamController {
 
     private ExamFormView viewWithMessage(ExamModel exam, String message) {
         return new ExamFormView(exam, message);
-}
+    }
+}*/
