@@ -15,7 +15,7 @@
                 </nav>
             </div>
             <th:block th:include="message"></th:block>
-            <form action="#" th:action="@{/background}" th:object="${background}" method="post">
+            <form action="#" th:action="@{/background}" th:object="${background}" method="POST">
                 <input id="id" th:field="*{id}" type="hidden">
                 <div class="row">
                     <div class="input-field col s12">
