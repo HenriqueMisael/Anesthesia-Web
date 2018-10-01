@@ -1,6 +1,23 @@
-document.getElementById('name').focus();
-var form = $('form');
-var dias_atendimento = $('#dias_atendimento');
+var $NOME = $('name');
+var segundaManha    = $('#segundaManha1');
+var segundaTarde    = $('#segundaTarde1');
+var tercaManha      = $('#tercaManha1');
+var tercaTarde      = $('#tercaTarde1');
+var quartaManha     = $('#quartaManha1');
+var quartaTarde     = $('#quartaTarde1');
+var quintaManha     = $('#quintaManha1');
+var quintaTarde     = $('#quintaTarde1');
+var sextaManha      = $('#sextaManha1');
+var sextaTarde      = $('#sextaTarde1');
+var sabadoManha     = $('#sabadoManha1');
+var sabadoTarde     = $('#sabadoTarde1');
+var domingoManha    = $('#domingoManha1');
+var domingoTarde    = $('#domingoTarde1');
+if($NOME.length > 0){
+    $NOME.focus();
+}
+
+var form = $('#form_doctor');
 var erro_atendimento = $('.erro_atendimento');
 var formvalidate = form.validate({
     rules:{
@@ -10,7 +27,7 @@ var formvalidate = form.validate({
         crm:{
             required: true,
             number: true
-        },
+        }
     },
     messages:{
         name: "Por favor, preencha um nome",
@@ -35,6 +52,6 @@ function verificaDiasAtendimento(){
 
 function validaform(){
     if(formvalidate.form() && verificaDiasAtendimento()){
-        form.submit();
+        form[0].submit();
     }
 }
