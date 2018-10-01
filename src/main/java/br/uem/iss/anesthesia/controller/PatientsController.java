@@ -2,10 +2,8 @@ package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SavePatientBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
-import br.uem.iss.anesthesia.model.entity.CityModel;
-import br.uem.iss.anesthesia.model.entity.CivilState;
-import br.uem.iss.anesthesia.model.entity.Gender;
-import br.uem.iss.anesthesia.model.entity.PatientModel;
+import br.uem.iss.anesthesia.model.entity.*;
+import br.uem.iss.anesthesia.model.repository.BackgroundRepository;
 import br.uem.iss.anesthesia.model.repository.CityRepository;
 import br.uem.iss.anesthesia.model.repository.PatientRepository;
 import br.uem.iss.anesthesia.view.PatientView;
@@ -33,6 +31,8 @@ public class PatientsController {
     private CityRepository cityRepository;
     @Autowired
     private SavePatientBusiness savePatientBusiness;
+    @Autowired
+    private BackgroundRepository backgroundRepository;
 
     @GetMapping
     public ModelAndView listPatients(@RequestParam(value = "cpf", required = false) String cpf, @RequestParam(value = "name", required = false) String name) {
@@ -106,6 +106,7 @@ public class PatientsController {
 
     private PatientView viewWithMessage(PatientModel patient, String message) {
         Iterable<CityModel> cityOptions = cityRepository.findAll();
+        Iterable<BackgroundModel> backgrounds = backgroundRepository.findAll();
         List<String> ufOptions = new ArrayList<>();
         for (CityModel cityModel : cityOptions) {
             String uf = cityModel.getUf();
@@ -113,6 +114,6 @@ public class PatientsController {
                 ufOptions.add(uf);
             }
         }
-        return new PatientView(patient, message, cityOptions, ufOptions, Gender.values(), CivilState.values());
+        return new PatientView(patient, message, cityOptions, ufOptions, Gender.values(), CivilState.values(), backgrounds);
     }
 }
