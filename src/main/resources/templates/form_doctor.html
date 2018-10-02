@@ -15,7 +15,7 @@
                 </nav>
             </div>
             <!--<th:block th:include="message"></th:block>-->
-            <form action="#" th:action="@{/doctor}" th:object="${doctor}" method="POST">
+            <form action="#" th:action="@{/doctor}" th:object="${doctor}" method="POST" id="form_doctor">
                 <input id="id" th:field="*{id}" type="hidden">
                 <div class="row">
                     <div class="input-field col s2">
