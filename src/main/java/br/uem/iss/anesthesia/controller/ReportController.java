@@ -18,7 +18,7 @@ public class ReportController {
     }
 
     @GetMapping("/patient-registry/{id}")
-    public ModelAndView patientReport(@PathVariable Long id) {
+    public ModelAndView patientRegistry(@PathVariable Long id) {
         return new ModelAndView("report_patient-registry", "patient", patientRepository.findById(id).get());
     }
 }
