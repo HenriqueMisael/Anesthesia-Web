@@ -6,9 +6,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class ExamIndexView extends ModelAndView {
 
-    public ExamIndexView(Iterable<ExamModel> exam, String name){
+    public ExamIndexView(Iterable<ExamModel> exam){
         super("layouts/app", "exam", exam);
         this.addObject("conteudo", "index_exam");
-        this.addObject("filtro_name", name);
+        
     }
 }

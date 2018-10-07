@@ -6,11 +6,11 @@ import br.uem.iss.anesthesia.model.entity.Week;
 import org.springframework.web.servlet.ModelAndView;
 
 public class ExamFormView extends ModelAndView {
-    public ExamFormView(ExamModel exam, String message) {
+    public ExamFormView(ExamModel exam) {
         super("layouts/app", "exam", exam);
-        this.addObject("message", message);
+        this.addObject("message", exam);
         this.addObject("metodo", "Adicionar ");
-        this.addObject("dias_semana", Week.values());
-        this.addObject("conteudo", "form_doctor");
+        this.addObject("conteudo", "form_exam");
+
     }
 }
