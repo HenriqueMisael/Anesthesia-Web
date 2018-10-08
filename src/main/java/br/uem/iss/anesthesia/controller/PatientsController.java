@@ -22,9 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/patient")
+@RequestMapping(PatientsController.HOME)
 public class PatientsController {
 
+    public static final String HOME = "/patient";
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
@@ -69,15 +70,15 @@ public class PatientsController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ModelAndView deletePatient(@PathVariable Long id) {
+    @GetMapping("/{id}/delete")
+    public String deletePatient(@PathVariable Long id) {
         PatientModel patient = patientRepository.findById(id).get();
         patient.inactivate();
         try {
             savePatientBusiness.save(patient);
         } catch (BusinessRuleException e) {
         }
-        return listPatients(null, null);
+        return "redirect:" + HOME;
     }
 
     @InitBinder

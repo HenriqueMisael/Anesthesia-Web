@@ -13,5 +13,4 @@ document.addEventListener('DOMContentLoaded', function () {
     M.Autocomplete.init(ufAutocomplete, {
         data: ufOptions
     });
-
 });

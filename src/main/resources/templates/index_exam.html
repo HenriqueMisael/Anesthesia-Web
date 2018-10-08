@@ -1,8 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="corpo">
+    <div th:fragment="corpo">
     <div class="container">
         <div class="row">
-            <h2 class="center">Cadastro de Pacientes</h2>
+            <h2 class="center">Cadastro de Exames</h2>
             <div class="row">
                 <nav>
                     <div class="nav-wrapper blue darken-1">
@@ -16,8 +16,8 @@
             <div class="row">
                 <form method="get">
                     <div class="input-field col s3">
-                        <input id="cpf" name="cpf" type="text">
-                        <label for="cpf">CPF</label>
+                        <input id="codigo" name="codigo" type="text">
+                        <label for="codigo">Código</label>
                     </div>
                     <div class="input-field col s8">
                         <input id="name" name="name" type="text">
@@ -26,7 +26,7 @@
                     <div class="col s1">
                         <div class="row">
                             <div class="col s6">
-                                <a href="/patient" class="btn-floating btn-large waves-effect waves-light blue"><i
+                                <a href="/exam" class="btn-floating btn-large waves-effect waves-light blue"><i
                                         class="material-icons">clear_all</i></a>
                             </div>
                             <div class="col s6">
@@ -42,26 +42,24 @@
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
-                    <th>Sobrenome</th>
-                    <th><a href="/patient/new" class="btn-floating btn-small waves-effect waves-light blue"><i
+                    <th><a href="/exam/new" class="btn-floating btn-small waves-effect waves-light blue"><i
                             class="material-icons">add</i></a>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="patient : ${patients}">
-                    <td><span th:text="${patient.id}"></span></td>
-                    <td><span th:text="${patient.name}"></span></td>
-                    <td><span th:text="${patient.surname}"></span></td>
+                <tr th:each="patient : ${exam}">
+                    <td><span th:text="${exam.id}"></span></td>
+                    <td><span th:text="${exam.name}"></span></td>
                     <td>
-                        <a class="btn-floating btn-small waves-effect waves-light blue"
-                           th:href="${(#mvc.url('PC#deletePatient').arg(0, patient.id)).build()}"><i
+                        <a class="btn-floating btn-small waves-effect waves-light blue delete"
+                           th:data-url="${(#mvc.url('PC#deletePatient').arg(0, exam.id)).build()}"><i
                                 class="material-icons">delete</i></a>
                         <a class="btn-floating btn-small waves-effect waves-light blue"
-                           th:href="${(#mvc.url('PC#editPatient').arg(0, patient.id)).build()}"><i
+                           th:href="${(#mvc.url('PC#editPatient').arg(0, exam.id)).build()}"><i
                                 class="material-icons">edit</i></a>
                         <a class="btn-floating btn-small waves-effect waves-light blue"
-                           th:href="${'/report/patient-registry/' + patient.id}"><i
+                           th:href="${'/report/patient-registry/' + exam.id}"><i
                                 class="material-icons">local_printshop</i></a>
                     </td>
                 </tr>

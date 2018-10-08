@@ -54,8 +54,8 @@
                     <td><span th:text="${patient.name}"></span></td>
                     <td><span th:text="${patient.surname}"></span></td>
                     <td>
-                        <a class="btn-floating btn-small waves-effect waves-light blue"
-                           th:href="${(#mvc.url('PC#deletePatient').arg(0, patient.id)).build()}"><i
+                        <a class="btn-floating btn-small waves-effect waves-light blue delete"
+                           th:data-url="${(#mvc.url('PC#deletePatient').arg(0, patient.id)).build()}"><i
                                 class="material-icons">delete</i></a>
                         <a class="btn-floating btn-small waves-effect waves-light blue"
                            th:href="${(#mvc.url('PC#editPatient').arg(0, patient.id)).build()}"><i
