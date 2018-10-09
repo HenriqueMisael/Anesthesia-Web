@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Medicamento</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb">Medicamento</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <table class="col s6">
+                    <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th><a href="/background/new" class="btn-floating btn-small waves-effect waves-light blue"><i
+                                class="material-icons">add</i></a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="medicine : ${medicines}">
+                        <td><span th:text="${medicine.id}"></span></td>
+                        <td><span th:text="${medicine.name}"></span></td>
+                        <td><a class="btn-floating btn-small waves-effect waves-light blue"
+                               th:href="${(#mvc.url('MC#editMedicine').arg(0, medicine.id)).build()}"><i
+                                class="material-icons">edit</i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/index_medicine.js}"></script>
+</div>
 
-</body>
 </html>

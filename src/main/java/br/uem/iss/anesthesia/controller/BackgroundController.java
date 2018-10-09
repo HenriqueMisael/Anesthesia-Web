@@ -18,6 +18,7 @@ import javax.validation.Valid;
 public class BackgroundController {
     @Autowired
     private BackgroundRepository backgroundRepository;
+    @Autowired
     private SaveBackgroundBusiness saveBackgroundBusiness;
 
     @GetMapping

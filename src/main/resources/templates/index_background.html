@@ -19,7 +19,6 @@
                     <tr>
                         <th>Código</th>
                         <th>Nome</th>
-                        <th>Ativo</th>
                         <th><a href="/background/new" class="btn-floating btn-small waves-effect waves-light blue"><i
                                 class="material-icons">add</i></a>
                         </th>
@@ -29,7 +28,6 @@
                     <tr th:each="background : ${backgrounds}">
                         <td><span th:text="${background.id}"></span></td>
                         <td><span th:text="${background.name}"></span></td>
-                        <td><span th:text="${background.active}"></span></td>
                         <td><a class="btn-floating btn-small waves-effect waves-light blue"
                                th:href="${(#mvc.url('BC#editBackground').arg(0, background.id)).build()}"><i
                                 class="material-icons">edit</i></a>
