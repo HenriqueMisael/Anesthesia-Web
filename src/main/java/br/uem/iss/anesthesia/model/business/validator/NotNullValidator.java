@@ -10,8 +10,8 @@ public abstract class NotNullValidator {
         this.field = field;
     }
 
-    public void validate(Object data) throws NullContentNotAllowedException {
-        if (data == null) {
+    public void validate(String data) throws NullContentNotAllowedException {
+        if (data == null || data.isEmpty()) {
             throw new NullContentNotAllowedException(field);
         }
     }

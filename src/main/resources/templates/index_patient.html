@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <div th:fragment="corpo">
+<div th:fragment="corpo">
     <div class="container">
         <div class="row">
             <h2 class="center">Cadastro de Pacientes</h2>
@@ -60,7 +60,7 @@
                         <a class="btn-floating btn-small waves-effect waves-light blue"
                            th:href="${(#mvc.url('PC#editPatient').arg(0, patient.id)).build()}"><i
                                 class="material-icons">edit</i></a>
-                        <a class="btn-floating btn-small waves-effect waves-light blue"
+                        <a class="btn-floating btn-small waves-effect waves-light blue" target="_blank"
                            th:href="${'/report/patient-registry/' + patient.id}"><i
                                 class="material-icons">local_printshop</i></a>
                     </td>

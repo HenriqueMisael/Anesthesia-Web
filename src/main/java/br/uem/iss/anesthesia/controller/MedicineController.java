@@ -16,6 +16,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/medicine")
 public class MedicineController {
+
     @Autowired
     private MedicineRepository medicineRepository;
     @Autowired
@@ -57,6 +58,6 @@ public class MedicineController {
     }
 
     private MedicineFormView viewWithMessage(MedicineModel medicine, String message) {
-        return new MedicineFormView(medicine);
+        return new MedicineFormView(medicine, message);
     }
 }

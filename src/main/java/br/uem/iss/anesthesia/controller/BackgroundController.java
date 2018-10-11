@@ -57,6 +57,6 @@ public class BackgroundController {
     }
 
     private BackgroundView viewWithMessage(BackgroundModel background, String message) {
-        return new BackgroundView(background);
+        return new BackgroundView(background, message);
     }
 }
