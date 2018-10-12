@@ -93,53 +93,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <table class="col s6">
-                        <thead>
-                        <tr>
-                            <th>Antecendente</th>
-                            <th>&nbsp;</th>
-                            <th><a href="/background/new" class="btn-floating btn-small waves-effect waves-light blue"><i
-                                    class="material-icons">add</i></a>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="background : ${backgrounds}">
-                            <td>
-                                <p>
-                                    <label>
-                                        <input type="checkbox" th:value="${background.id}" class="filled-in" />
-                                        <span th:text="${background.name}"></span>
-                                    </label>
-                                </p>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <table class="col s6">
-                        <thead>
-                        <tr>
-                            <th>Medicamentos</th>
-                            <th>&nbsp;</th>
-                            <th><a href="/medicine/new" class="btn-floating btn-small waves-effect waves-light blue"><i
-                                    class="material-icons">add</i></a>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="medicine : ${medicines}">
-                            <td>
-                                <p>
-                                    <label>
-                                        <input type="checkbox" th:value="${medicine.id}" class="filled-in" />
-                                        <span th:text="${medicine.name}"></span>
-                                    </label>
-                                </p>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="input-field col s6">
+                        <select th:field="*{backgrounds}" multiple>
+                            <option value="" disabled>Selecione os atencedentes</option>
+                            <option th:each="background : ${backgrounds}" th:value="${{background}}"
+                                    th:text="${background}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-field col s6">
+                        <select th:field="*{medicines}" multiple>
+                            <option value="" disabled>Selecione os medicamentos</option>
+                            <option th:each="medicine : ${medicines}" th:value="${{medicine}}"
+                                    th:text="${medicine}">
+                            </option>
+                        </select>
+                    </div>
                 </div>
 
                 <button class="waves-effect waves-light btn" type="submit">Salvar

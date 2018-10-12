@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    /*<![CDATA[*/
-    var cityOptions = /*[[${cityOptions}]]*/ [];
-    var ufOptions = /*[[${ufOptions}]]*/ [];
-    /*]]>*/
     var cityAutocomplete = document.querySelector("#city");
     M.Autocomplete.init(cityAutocomplete, {
         data: {
