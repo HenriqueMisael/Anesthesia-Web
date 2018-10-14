@@ -218,4 +218,9 @@ public class PatientModel extends DefaultModel {
             target.add(o);
         }
     }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getSurname();
+    }
 }

@@ -11,6 +11,8 @@ import br.uem.iss.anesthesia.model.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Service
@@ -23,10 +25,12 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
     private SaveBackgroundBusiness saveBackgroundBusiness;
     private SaveMedicineBusiness saveMedicineBusiness;
     private ModelNoveltyChecker modelNoveltyChecker;
+    private PatientRepository patientRepository;
 
     @Autowired
     public SavePatientBusiness(PatientRepository patientRepository, CpfValidator cpfValidator, NameNotNullValidator nameNotNullValidator, SurnameNotNullValidator surnameNotNullValidator, SaveCityBusiness saveCityBusiness, SaveBackgroundBusiness saveBackgroundBusiness, SaveMedicineBusiness saveMedicineBusiness, ModelNoveltyChecker modelNoveltyChecker) {
         super(patientRepository);
+        this.patientRepository = patientRepository;
         this.cpfValidator = cpfValidator;
         this.nameNotNullValidator = nameNotNullValidator;
         this.surnameNotNullValidator = surnameNotNullValidator;
@@ -58,12 +62,16 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
     }
 
     @Override
-    protected void validateFields(PatientModel model) throws InvalidCpfFormatException, InvalidCpfContentException, NullContentNotAllowedException, PatientWithoutContactException {
+    protected void validateFields(PatientModel model) throws InvalidCpfFormatException, InvalidCpfContentException, NullContentNotAllowedException, PatientWithoutContactException, DuplicatedCpfException {
         cpfValidator.validate(model.getCpf());
         nameNotNullValidator.validate(model.getName());
         surnameNotNullValidator.validate(model.getSurname());
         if (isBlank(model.getCellphoneNumber()) && isBlank(model.getPhoneNumber()) && isBlank(model.getEmail())) {
             throw new PatientWithoutContactException();
+        }
+        Set<PatientModel> found = patientRepository.findByCpfContainingAndActiveTrue(model.getCpf());
+        if (!found.isEmpty()) {
+            throw new DuplicatedCpfException(found.iterator().next());
         }
     }
 }
