@@ -55,6 +55,10 @@ public class ProcessModel extends DefaultModel {
         this.active = active;
     }
 
+    public void inactivate() {
+        active = false;
+    }
+
     @Override
     public String toString() {
         return "Ativo: " + this.active + ", Doctor: " + this.doctor+ ", Paciente: " + this.patient.getName();

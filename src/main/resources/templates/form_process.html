@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Processos</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb" th:href="@{/process}">Cadastro de Processos</a>
+                            <a class="breadcrumb" th:text="${metodo} + Processos"></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <form action="#" th:action="@{/process}" th:object="${process}" method="POST" id="form_process">
+                <input id="id" th:field="*{id}" type="hidden">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name="doctor" id="doctor">
+                            <option th:each     ="doctor : ${doctors}"
+                                    th:selected ="${doctor == process.doctor}"
+                                    th:value    ="${doctor.id}"
+                                    th:text     ="${doctor.name}">
+                            </option>
+                        </select>
+                        <label for="doctor">Médico</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="patient" id="patient">
+                            <option th:each     ="patient : ${patients}"
+                                    th:selected ="${patient == process.patient}"
+                                    th:value    ="${patient.id}"
+                                    th:text     ="${patient.name}"></option>
+                        </select>
+                        <label for="patient">Paciente</label>
+                    </div>
+                </div>
+                <button class="waves-effect waves-light btn" type="button" onclick="validaform()">Salvar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a href="/doctor" class="waves-effect waves-light btn">Voltar</a>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

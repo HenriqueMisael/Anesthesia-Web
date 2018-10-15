@@ -19,9 +19,16 @@
                         <input id="filtro_crm" name="filtro_crm" type="text" th:value="${filtro_crm}">
                         <label for="filtro_crm">CRM</label>
                     </div>
-                    <div class="input-field col s7">
+                    <div class="input-field col s5">
                         <input id="filtro_name" name="filtro_name" type="text" th:value="${filtro_name}">
                         <label for="filtro_name">Nome</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <select id="filtro_ativo" name="filtro_ativo" th:value="${filtro_ativo}">
+                            <option th:value="true" th:text="Sim" th:selected="${filtro_ativo == true}"></option>
+                            <option th:value="false" th:text="Não" th:selected="${filtro_ativo == false}"></option>
+                        </select>
+                        <label for="filtro_ativo">Ativo</label>
                     </div>
                     <div class="col s2">
                         <div class="row">

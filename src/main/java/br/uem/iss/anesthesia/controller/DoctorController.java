@@ -25,18 +25,18 @@ public class DoctorController {
     private SaveDoctorBusiness saveDoctorBusiness;
 
     @GetMapping
-    public ModelAndView listDoctors(@RequestParam(value = "filtro_crm", required = false) String crm, @RequestParam(value = "filtro_name", required = false) String name) {
+    public ModelAndView listDoctors(@RequestParam(value = "filtro_crm", required = false) String crm,
+                                    @RequestParam(value = "filtro_name", required = false) String name,
+                                    @RequestParam(value = "filtro_ativo", required = false, defaultValue = "true") boolean ativo) {
         Iterable<DoctorModel> doctor;
-        if (crm != null && name != null) {
+        crm     = ((crm == null) ? "" : crm);
+        name    = ((name == null) ? "" : name);
+        if (ativo) {
             doctor = doctorRepository.findByCrmContainingAndNameContainingAndActiveTrue(crm, name);
-        } else if (crm != null) {
-            doctor = doctorRepository.findByCrmContainingAndActiveTrue(crm);
-        } else if (name != null) {
-            doctor = doctorRepository.findByNameContainingAndActiveTrue(name);
-        } else {
-            doctor = doctorRepository.findByActiveTrue();
+        }else{
+            doctor = doctorRepository.findByCrmContainingAndNameContainingAndActiveFalse(crm, name);
         }
-        return new DoctorIndexView(doctor, name, crm);
+        return new DoctorIndexView(doctor, name, crm, ativo);
     }
 
     @GetMapping("/new")
@@ -53,7 +53,7 @@ public class DoctorController {
     public ModelAndView savePatient(@Valid DoctorModel doctor) {
         try {
             saveDoctorBusiness.save(doctor);
-            return listDoctors(null, null);
+            return listDoctors(null, null, true);
         } catch (BusinessRuleException e) {
             return viewWithMessage(doctor, e.getMessage());
         }
@@ -67,7 +67,7 @@ public class DoctorController {
             saveDoctorBusiness.save(doctor);
         } catch (BusinessRuleException e) {
         }
-        return new DoctorIndexView(doctorRepository.findByActiveTrue(), null, null);
+        return new DoctorIndexView(doctorRepository.findByActiveTrue(), null, null, true);
     }
 
     private DoctorFormView viewWithoutMessage(DoctorModel doctor) {
