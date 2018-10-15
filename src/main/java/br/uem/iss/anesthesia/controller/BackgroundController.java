@@ -18,6 +18,7 @@ import javax.validation.Valid;
 public class BackgroundController {
     @Autowired
     private BackgroundRepository backgroundRepository;
+    @Autowired
     private SaveBackgroundBusiness saveBackgroundBusiness;
 
     @GetMapping
@@ -56,6 +57,6 @@ public class BackgroundController {
     }
 
     private BackgroundView viewWithMessage(BackgroundModel background, String message) {
-        return new BackgroundView(background);
+        return new BackgroundView(background, message);
     }
 }

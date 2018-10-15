@@ -1,9 +1,6 @@
 package br.uem.iss.anesthesia.model.business;
 
-import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
-import br.uem.iss.anesthesia.model.business.exception.InvalidCpfContentException;
-import br.uem.iss.anesthesia.model.business.exception.InvalidCpfFormatException;
-import br.uem.iss.anesthesia.model.business.exception.NullContentNotAllowedException;
+import br.uem.iss.anesthesia.model.business.exception.*;
 import br.uem.iss.anesthesia.model.business.validator.CpfValidator;
 import br.uem.iss.anesthesia.model.business.validator.NameNotNullValidator;
 import br.uem.iss.anesthesia.model.business.validator.SurnameNotNullValidator;
@@ -13,6 +10,10 @@ import br.uem.iss.anesthesia.model.entity.PatientModel;
 import br.uem.iss.anesthesia.model.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Service
 public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
@@ -24,10 +25,12 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
     private SaveBackgroundBusiness saveBackgroundBusiness;
     private SaveMedicineBusiness saveMedicineBusiness;
     private ModelNoveltyChecker modelNoveltyChecker;
+    private PatientRepository patientRepository;
 
     @Autowired
     public SavePatientBusiness(PatientRepository patientRepository, CpfValidator cpfValidator, NameNotNullValidator nameNotNullValidator, SurnameNotNullValidator surnameNotNullValidator, SaveCityBusiness saveCityBusiness, SaveBackgroundBusiness saveBackgroundBusiness, SaveMedicineBusiness saveMedicineBusiness, ModelNoveltyChecker modelNoveltyChecker) {
         super(patientRepository);
+        this.patientRepository = patientRepository;
         this.cpfValidator = cpfValidator;
         this.nameNotNullValidator = nameNotNullValidator;
         this.surnameNotNullValidator = surnameNotNullValidator;
@@ -59,9 +62,16 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
     }
 
     @Override
-    protected void validateFields(PatientModel model) throws InvalidCpfFormatException, InvalidCpfContentException, NullContentNotAllowedException {
+    protected void validateFields(PatientModel model) throws InvalidCpfFormatException, InvalidCpfContentException, NullContentNotAllowedException, PatientWithoutContactException, DuplicatedCpfException {
         cpfValidator.validate(model.getCpf());
         nameNotNullValidator.validate(model.getName());
         surnameNotNullValidator.validate(model.getSurname());
+        if (isBlank(model.getCellphoneNumber()) && isBlank(model.getPhoneNumber()) && isBlank(model.getEmail())) {
+            throw new PatientWithoutContactException();
+        }
+        Set<PatientModel> found = patientRepository.findByCpfContainingAndActiveTrue(model.getCpf());
+        if (!found.isEmpty()) {
+            throw new DuplicatedCpfException(found.iterator().next());
+        }
     }
 }

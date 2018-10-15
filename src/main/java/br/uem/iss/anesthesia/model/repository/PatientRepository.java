@@ -4,14 +4,16 @@ import br.uem.iss.anesthesia.model.entity.PatientModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Set;
+
 @Repository
 public interface PatientRepository extends CrudRepository<PatientModel, Long> {
 
-    Iterable<PatientModel> findByActiveTrue();
+    Set<PatientModel> findByActiveTrue();
 
-    Iterable<PatientModel> findByCpfContainingAndActiveTrue(String cpf);
+    Set<PatientModel> findByCpfContainingAndActiveTrue(String cpf);
 
-    Iterable<PatientModel> findByNameContainingAndActiveTrue(String name);
+    Set<PatientModel> findByNameContainingAndActiveTrue(String name);
 
-    Iterable<PatientModel> findByCpfContainingAndNameContainingAndActiveTrue(String cpf, String name);
+    Set<PatientModel> findByCpfContainingAndNameContainingAndActiveTrue(String cpf, String name);
 }

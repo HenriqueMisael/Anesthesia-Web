@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Medicamentos</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb" th:href="@{/medicine}">Medicamentos</a>
+                            <a class="breadcrumb">Cadastro de Medicamentos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <th:block th:include="message"></th:block>
+            <form action="#" th:action="@{/medicine}" th:object="${medicine}" method="POST">
+                <input id="id" th:field="*{id}" type="hidden">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" th:field="*{name}" type="text">
+                        <label for="name">Nome</label>
+                    </div>
+                </div>
+                <button class="waves-effect waves-light btn" type="submit">Salvar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a href="/medicine" class="waves-effect waves-light btn">Voltar</a>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/form_medicine.js}"></script>
+</div>
 
-</body>
 </html>

@@ -1,6 +1,7 @@
 package br.uem.iss.anesthesia.model.business;
 
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
+import br.uem.iss.anesthesia.model.business.exception.PatientWithoutContactException;
 import br.uem.iss.anesthesia.model.business.validator.CpfValidator;
 import br.uem.iss.anesthesia.model.business.validator.NameNotNullValidator;
 import br.uem.iss.anesthesia.model.business.validator.SurnameNotNullValidator;
@@ -86,11 +87,21 @@ public class SavePatientBusinessTest extends UnitTest {
         save(patientModel);
     }
 
+    @Test(expected = PatientWithoutContactException.class)
+    public void withoutContact() throws BusinessRuleException {
+        doReturn("09213087950").when(patientModel).getCpf();
+        doReturn("Henrique Misael").when(patientModel).getName();
+        doReturn("Machado").when(patientModel).getSurname();
+        doReturn(city).when(patientModel).getCity();
+        save(patientModel);
+    }
+
     private void mockPatient() {
         doReturn("09213087950").when(patientModel).getCpf();
         doReturn("Henrique Misael").when(patientModel).getName();
         doReturn("Machado").when(patientModel).getSurname();
         doReturn(city).when(patientModel).getCity();
+        doReturn("44997372668").when(patientModel).getCellphoneNumber();
     }
 
     private void save(PatientModel patientModel) throws BusinessRuleException {

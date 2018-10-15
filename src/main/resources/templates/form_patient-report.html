@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Relatório de Pacientes</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb" th:href="@{/report/}">Relatórios</a>
+                            <a class="breadcrumb">Relatório de Pacientes</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <form method="post" enctype="text/plain" th:object="${filter}">
+                    <div class="input-field col s6">
+                        <select th:field="*{doctor}">
+                            <option value="" disabled>Selecione o médico</option>
+                            <option th:each="doctor : ${doctors}" th:value="${{doctor}}"
+                                    th:text="${doctor.name}">
+                            </option>
+                        </select>
+                        <div class="input-field col s2">
+                            <input id="initial" th:field="*{initial}" type="text" class="datepicker">
+                            <label for="initial">Data Inicial</label>
+                        </div>
+                        <div class="input-field col s2">
+                            <input id="end" th:field="*{end}" type="text" class="datepicker">
+                            <label for="end">Data Final</label>
+                        </div>
+                    </div>
+                    <div class="col s1">
+                        <button target="_blank" type="submit"
+                                class="btn-floating btn-large waves-effect waves-light blue"><i
+                                class="material-icons">done</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

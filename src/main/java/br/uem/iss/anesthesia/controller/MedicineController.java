@@ -16,9 +16,11 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/medicine")
 public class MedicineController {
+
     @Autowired
     private MedicineRepository medicineRepository;
-    private SaveMedicineBusiness savemedicineBusiness;
+    @Autowired
+    private SaveMedicineBusiness saveMedicineBusiness;
 
     @GetMapping
     public ModelAndView listMedicines(@RequestParam(value = "name", required = false) String name) {
@@ -44,7 +46,7 @@ public class MedicineController {
     @PostMapping
     public ModelAndView saveMedicine(@Valid MedicineModel medicine) {
         try {
-            savemedicineBusiness.save(medicine);
+            saveMedicineBusiness.save(medicine);
             return listMedicines(null);
         } catch (BusinessRuleException e) {
             return viewWithMessage(medicine, e.getMessage());
@@ -56,6 +58,6 @@ public class MedicineController {
     }
 
     private MedicineFormView viewWithMessage(MedicineModel medicine, String message) {
-        return new MedicineFormView(medicine);
+        return new MedicineFormView(medicine, message);
     }
 }
