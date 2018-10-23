@@ -1,9 +1,12 @@
 package br.uem.iss.anesthesia.model.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "MedicalProcedures")
@@ -11,7 +14,8 @@ public class MedicalProcedureModel extends DefaultModel {
 
     private String name;
     private boolean active;
-    private List<ExamModel> exams;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<ExamModel> exams;
 
     public String getName() {
         return name;
@@ -29,9 +33,13 @@ public class MedicalProcedureModel extends DefaultModel {
         this.active = active;
     }
 
-    public List<ExamModel> getExams() { return exams; }
+    public Set<ExamModel> getExams() {
+        return exams;
+    }
 
-    public void setExams(List<ExamModel> exams) { this.exams = exams; }
+    public void setExams(Set<ExamModel> exams) {
+        this.exams = exams;
+    }
 
     @Override
     public boolean equals(Object o) {
