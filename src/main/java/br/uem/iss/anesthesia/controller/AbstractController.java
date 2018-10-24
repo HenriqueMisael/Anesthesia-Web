@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class AbstractController {
 
     @InitBinder
-    protected void initBinder(WebDataBinder binder) {
+    public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDate.class, new LocalDatePropertyEditorSupport());
         binder.registerCustomEditor(LocalDateTime.class, new LocalDateTimePropertyEditorSupport());
     }

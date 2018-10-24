@@ -71,7 +71,10 @@ public class SavePatientBusiness extends SaveModelBusiness<PatientModel> {
         }
         Set<PatientModel> found = patientRepository.findByCpfContainingAndActiveTrue(model.getCpf());
         if (!found.isEmpty()) {
-            throw new DuplicatedCpfException(found.iterator().next());
+            PatientModel patientFound = found.iterator().next();
+            if (!patientFound.getId().equals(model.getId())) {
+                throw new DuplicatedCpfException(patientFound);
+            }
         }
     }
 }
