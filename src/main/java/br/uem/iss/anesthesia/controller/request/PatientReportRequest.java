@@ -2,13 +2,13 @@ package br.uem.iss.anesthesia.controller.request;
 
 import br.uem.iss.anesthesia.model.entity.DoctorModel;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class PatientReportRequest {
 
     private DoctorModel doctor;
-    private LocalDateTime initial;
-    private LocalDateTime end;
+    private LocalDate initial;
+    private LocalDate end;
 
     public DoctorModel getDoctor() {
         return doctor;
@@ -18,19 +18,19 @@ public class PatientReportRequest {
         this.doctor = doctor;
     }
 
-    public LocalDateTime getInitial() {
+    public LocalDate getInitial() {
         return initial;
     }
 
-    public void setInitial(LocalDateTime initial) {
+    public void setInitial(LocalDate initial) {
         this.initial = initial;
     }
 
-    public LocalDateTime getEnd() {
+    public LocalDate getEnd() {
         return end;
     }
 
-    public void setEnd(LocalDateTime end) {
+    public void setEnd(LocalDate end) {
         this.end = end;
     }
 }

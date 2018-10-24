@@ -12,7 +12,15 @@ public class AbstractController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(LocalDate.class, new LocalDatePropertyEditorSupport());
+        registerLocalDateCustomEditor(binder);
+        registerLocalDateTimeCustomEditor(binder);
+    }
+
+    private void registerLocalDateTimeCustomEditor(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDateTime.class, new LocalDateTimePropertyEditorSupport());
+    }
+
+    private void registerLocalDateCustomEditor(WebDataBinder binder) {
+        binder.registerCustomEditor(LocalDate.class, new LocalDatePropertyEditorSupport());
     }
 }
