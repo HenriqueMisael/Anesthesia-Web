@@ -1,12 +1,11 @@
 package br.uem.iss.anesthesia.view;
 
 import br.uem.iss.anesthesia.model.entity.*;
-import org.springframework.web.servlet.ModelAndView;
 
-public class PatientView extends ModelAndView {
+public class PatientView extends AbstractModelAndView {
 
     public PatientView(PatientModel patient, String message, Iterable<CityModel> cityOptions, Iterable<String> ufOptions, Gender[] genderOptions, CivilState[] civilStatesOptionsz, Iterable<BackgroundModel> backgrounds, Iterable<MedicineModel> medicines) {
-        super("layouts/app", "patient", patient);
+        super("form_patient", "patient", patient);
         this.addObject("message", message);
         this.addObject("genderOptions", genderOptions);
         this.addObject("civilStateOptions", civilStatesOptionsz);
@@ -14,6 +13,5 @@ public class PatientView extends ModelAndView {
         this.addObject("ufOptions", ufOptions);
         this.addObject("backgrounds", backgrounds);
         this.addObject("medicines", medicines);
-        this.addObject("conteudo", "form_patient");
     }
 }

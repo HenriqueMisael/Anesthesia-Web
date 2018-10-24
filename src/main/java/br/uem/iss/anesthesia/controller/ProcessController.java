@@ -1,9 +1,7 @@
 package br.uem.iss.anesthesia.controller;
 
-
 import br.uem.iss.anesthesia.model.business.SaveProcessBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
-import br.uem.iss.anesthesia.model.entity.PatientModel;
 import br.uem.iss.anesthesia.model.entity.ProcessModel;
 import br.uem.iss.anesthesia.model.repository.DoctorRepository;
 import br.uem.iss.anesthesia.model.repository.PatientRepository;
@@ -12,7 +10,10 @@ import br.uem.iss.anesthesia.view.ProcessFormView;
 import br.uem.iss.anesthesia.view.ProcessIndexView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -52,7 +53,7 @@ public class ProcessController {
     }
 //
 //    @PostMapping
-//    public ModelAndView savePatient(@Valid DoctorModel doctor) {
+//    public AbstractModelAndView savePatient(@Valid DoctorModel doctor) {
 //        try {
 //            saveDoctorBusiness.save(doctor);
 //            return listDoctors(null, null);

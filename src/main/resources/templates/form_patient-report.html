@@ -15,22 +15,22 @@
                 </nav>
             </div>
             <div class="row">
-                <form method="post" enctype="text/plain" th:object="${filter}">
-                    <div class="input-field col s6">
+                <form method="post" th:object="${filter}">
+                    <div class="input-field col s7">
                         <select th:field="*{doctor}">
                             <option value="" disabled>Selecione o médico</option>
                             <option th:each="doctor : ${doctors}" th:value="${{doctor}}"
                                     th:text="${doctor.name}">
                             </option>
                         </select>
-                        <div class="input-field col s2">
-                            <input id="initial" th:field="*{initial}" type="text" class="datepicker">
-                            <label for="initial">Data Inicial</label>
-                        </div>
-                        <div class="input-field col s2">
-                            <input id="end" th:field="*{end}" type="text" class="datepicker">
-                            <label for="end">Data Final</label>
-                        </div>
+                    </div>
+                    <div class="input-field col s2">
+                        <input id="initial" th:field="*{initial}" type="text" class="datepicker">
+                        <label for="initial">Data Inicial</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input id="end" th:field="*{end}" type="text" class="datepicker">
+                        <label for="end">Data Final</label>
                     </div>
                     <div class="col s1">
                         <button target="_blank" type="submit"

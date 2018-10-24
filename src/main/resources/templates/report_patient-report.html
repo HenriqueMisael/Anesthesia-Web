@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha de Paciente</title>
+    <style>
+        h1 {
+            color: #0D47A1;
+            font-family: Calibri;
+            font-size: 60px;
+        }
+
+        h2 {
+            color: black;;
+            font-family: Times;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        span {
+            display: block;
+        }
+
+        .field > span:nth-child(1) {
+            color: #0D47A1;
+            font-family: Calibri;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .field > span:nth-child(2) {
+            color: black;
+            font-family: Times;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body onload="window.print()">
+<h1>Relatórios de Pacientes</h1>
+<h2><span th:text="${description}"></span></h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nome do Paciente</th>
+        <th>Data da Consulta</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+        <td><span th:text="${appointment.patient.name + ' ' + appointment.patient.surname}"></span></td>
+        <td><span th:text="${appointment.date}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
