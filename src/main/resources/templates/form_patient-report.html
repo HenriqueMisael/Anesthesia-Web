@@ -18,7 +18,7 @@
                 <form method="post" th:object="${filter}">
                     <div class="input-field col s7">
                         <select th:field="*{doctor}">
-                            <option value="" disabled>Selecione o médico</option>
+                            <option th:value="${null}">Nenhum</option>
                             <option th:each="doctor : ${doctors}" th:value="${{doctor}}"
                                     th:text="${doctor.name}">
                             </option>

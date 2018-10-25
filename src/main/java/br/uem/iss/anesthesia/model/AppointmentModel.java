@@ -5,6 +5,7 @@ import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import br.uem.iss.anesthesia.model.entity.PatientModel;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -12,7 +13,9 @@ import java.time.LocalDateTime;
 @Table(name = "Appointments")
 public class AppointmentModel extends DefaultModel {
 
+    @ManyToOne
     private PatientModel patient;
+    @ManyToOne
     private DoctorModel doctor;
     private LocalDateTime date;
 

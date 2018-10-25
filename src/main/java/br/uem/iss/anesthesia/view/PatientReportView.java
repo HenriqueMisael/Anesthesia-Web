@@ -10,6 +10,11 @@ public class PatientReportView extends ModelAndView {
 
     public PatientReportView(String initial, String end, DoctorModel doctor, List<AppointmentModel> appointments) {
         super("report_patient-report", "appointments", appointments);
-        addObject("description", "Consultas com o médico " + doctor.getName() + " de " + initial + " a " + end);
+        String description = "Consultas";
+        if (doctor != null) {
+            description += " com o médico " + doctor.getName();
+        }
+        description += " de " + initial + " a " + end;
+        addObject("description", description);
     }
 }
