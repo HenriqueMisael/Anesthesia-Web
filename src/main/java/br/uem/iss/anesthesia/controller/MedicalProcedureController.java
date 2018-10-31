@@ -1,9 +1,11 @@
-/*package br.uem.iss.anesthesia.controller;
+package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SaveMedicalProcedureBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.entity.MedicalProcedureModel;
 import br.uem.iss.anesthesia.model.repository.MedicalProcedureRepository;
+import br.uem.iss.anesthesia.view.MedicalProcedureFormView;
+import br.uem.iss.anesthesia.view.MedicalProcedureIndexView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +34,7 @@ public class MedicalProcedureController {
     }
 
     @GetMapping("/new")
-    public MedicalProcedureFormView newMedicine() {
+    public MedicalProcedureFormView newMedicalProcedure() {
         return viewWithoutMessage(new MedicalProcedureModel());
     }
 
@@ -59,4 +61,3 @@ public class MedicalProcedureController {
         return new MedicalProcedureFormView(medicalProcedure, message);
     }
 }
-*/
