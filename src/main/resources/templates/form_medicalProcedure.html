@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Procedimentos Médicos</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb">Cadastro de Procedimentos Médicos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <th:block th:include="message"></th:block>
+            <form action="#" th:action="@{/medicalProcedure}" th:object="${medicalProcedure}" method="post">
+                <input id="id" th:field="*{id}" type="hidden">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" th:field="*{name}" type="text">
+                        <label for="name">Nome</label>
+                    </div>
+                </div>
 
-</body>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select th:field="*{exams}" multiple>
+                            <option value="" disabled>Selecione os exames</option>
+                            <option th:each="exam : ${exams}" th:value="${{exam}}"
+                                    th:text="${exam}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="waves-effect waves-light btn" type="submit">Salvar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a href="/medicalProcedure" class="waves-effect waves-light btn">Voltar</a>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/form_medicalProcedure.js}"></script>
+</div>
+
 </html>

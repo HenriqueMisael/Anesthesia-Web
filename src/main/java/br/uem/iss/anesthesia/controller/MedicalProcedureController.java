@@ -2,7 +2,9 @@ package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SaveMedicalProcedureBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
+import br.uem.iss.anesthesia.model.entity.ExamModel;
 import br.uem.iss.anesthesia.model.entity.MedicalProcedureModel;
+import br.uem.iss.anesthesia.model.repository.ExamRepository;
 import br.uem.iss.anesthesia.model.repository.MedicalProcedureRepository;
 import br.uem.iss.anesthesia.view.MedicalProcedureFormView;
 import br.uem.iss.anesthesia.view.MedicalProcedureIndexView;
@@ -21,6 +23,8 @@ public class MedicalProcedureController {
     private MedicalProcedureRepository medicalProcedureRepository;
     @Autowired
     private SaveMedicalProcedureBusiness saveMedicalProcedureBusiness;
+    @Autowired
+    private ExamRepository examRepository;
 
     @GetMapping
     public ModelAndView listMedicalProcedures(@RequestParam(value = "name", required = false) String name) {
@@ -58,6 +62,8 @@ public class MedicalProcedureController {
     }
 
     private MedicalProcedureFormView viewWithMessage(MedicalProcedureModel medicalProcedure, String message) {
-        return new MedicalProcedureFormView(medicalProcedure, message);
+        Iterable<ExamModel> exams = examRepository.findAll();
+
+        return new MedicalProcedureFormView(medicalProcedure, message, exams);
     }
 }

@@ -26,10 +26,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="medicalProcedure : ${medicalProcedures}">
-                        <td><span th:text="${medicalProcedures.id}"></span></td>
-                        <td><span th:text="${medicalProcedures.name}"></span></td>
+                        <td><span th:text="${medicalProcedure.id}"></span></td>
+                        <td><span th:text="${medicalProcedure.name}"></span></td>
                         <td><a class="btn-floating btn-small waves-effect waves-light blue"
-                               th:href="${(#mvc.url('MPC#editMedicine').arg(0, medicalProcedure.id)).build()}"><i
+                               th:href="${(#mvc.url('MPC#editMedicalProcedure').arg(0, medicalProcedure.id)).build()}"><i
                                 class="material-icons">edit</i></a>
                         </td>
                     </tr>
