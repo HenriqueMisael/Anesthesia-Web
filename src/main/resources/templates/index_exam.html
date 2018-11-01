@@ -48,15 +48,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="patient : ${exam}">
+                <tr th:each="exam : ${exams}">
                     <td><span th:text="${exam.id}"></span></td>
                     <td><span th:text="${exam.name}"></span></td>
                     <td>
                         <a class="btn-floating btn-small waves-effect waves-light blue delete"
-                           th:data-url="${(#mvc.url('PC#deleteExam').arg(0, exam.id)).build()}"><i
+                           th:data-url="${(#mvc.url('EC#deleteExam').arg(0, exam.id)).build()}"><i
                                 class="material-icons">delete</i></a>
                         <a class="btn-floating btn-small waves-effect waves-light blue"
-                           th:href="${(#mvc.url('PC#editExam').arg(0, exam.id)).build()}"><i
+                           th:href="${(#mvc.url('EC#editExam').arg(0, exam.id)).build()}"><i
                                 class="material-icons">edit</i></a>
                         <a class="btn-floating btn-small waves-effect waves-light blue"
                            th:href="${'/report/exam-registry/' + exam.id}"><i

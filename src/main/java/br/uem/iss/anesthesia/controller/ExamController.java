@@ -32,9 +32,9 @@ public class ExamController {
         Iterable<ExamModel> exam;
         name    = ((name == null) ? "" : name);
         if (ativo) {
-            exam = examRepository.findByNameContainingAndActiveTrue(name);
+            exam = examRepository.findAll();
         }else{
-            exam = examRepository.findByNameContainingAndActiveTrue(name);
+            exam = examRepository.findAll();
         }
         return new ExamIndexView(exam, name,true);
     }
@@ -69,13 +69,9 @@ public class ExamController {
         }
         return new ExamIndexView(examRepository.findByActiveTrue(), null,true);
     }
-
-
     private ExamFormView viewWithoutMessage(ExamModel exam) {
         return viewWithMessage(exam, null);
     }
-
-
     private ExamFormView viewWithMessage(ExamModel exam, String message) {
         return new ExamFormView(exam);
     }
