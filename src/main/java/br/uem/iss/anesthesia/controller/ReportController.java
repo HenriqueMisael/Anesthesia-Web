@@ -40,7 +40,7 @@ public class ReportController extends AbstractController {
     }
 
     @GetMapping("/patient-registry/{id}")
-    public AbstractModelAndView patientRegistry(@PathVariable Long id) {
+    public ModelAndView patientRegistry(@PathVariable Long id) {
         return new PatientRegistryView(patientRepository.findById(id).get());
     }
 
