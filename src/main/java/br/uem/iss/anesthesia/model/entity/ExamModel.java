@@ -15,7 +15,9 @@ public class ExamModel extends DefaultModel{
     public ExamModel(){
 
     }
-
+    public void inactivate() {
+        active = false;
+    }
 
 
     public String getDescription() {
