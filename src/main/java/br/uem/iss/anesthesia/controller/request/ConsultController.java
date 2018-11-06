@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/exam")
+@RequestMapping("/consult")
 public class ConsultController {
 
     @Autowired

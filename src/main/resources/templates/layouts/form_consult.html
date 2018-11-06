@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Exames</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb">Cadastro de Exames</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <th:block th:include="message"></th:block>
+            <form action="#" th:action="@{/exam}" th:object="${exam}" method="post">
+                <input id="id" th:field="*{id}" type="hidden">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="name" th:field="*{name}" type="text">
+                        <label for="name">Nome</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="description" th:field="*{description}" type="text">
+                        <label for="name">Descrição</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="jejum" th:field="*{jejumTime}" type="text">
+                        <label for="name">Tempo de jejum</label>
+                    </div>
+                </div>
+
+
+                <button class="waves-effect waves-light btn" type="submit">Salvar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a href="/exam" class="waves-effect waves-light btn">Voltar</a>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/form_patient.js}"></script>
+</div>
+
+</html>

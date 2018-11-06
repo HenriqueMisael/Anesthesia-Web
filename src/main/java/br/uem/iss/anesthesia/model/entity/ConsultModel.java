@@ -12,12 +12,8 @@ public class ConsultModel extends DefaultModel {
     DoctorModel doctor;
     ProcessModel process;
     private boolean active;
+    String name;
 
-    public ConsultModel(PatientModel patient, DoctorModel doctor, ProcessModel process) {
-        this.patient = patient;
-        this.doctor = doctor;
-        this.process = process;
-    }
 
     public void inactivate() {
         active = false;
@@ -54,4 +50,19 @@ public class ConsultModel extends DefaultModel {
         }
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

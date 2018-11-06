@@ -26,22 +26,23 @@ public class SaveConsultBusiness extends SaveModelBusiness<ConsultModel> {
     private ConsultRepository consultRepository;
     private DoctorRepository doctorRepository;
     private ProcessRepository processRepository;
-
+    private NameNotNullValidator nameNotNullValidator;
 
     @Autowired
-    public SaveConsultBusiness(PatientRepository patientRepository, DoctorRepository doctorRepository, ProcessRepository processRepository,ConsultRepository consultRepository) {
+    public SaveConsultBusiness(ConsultRepository consultRepository) {
+        super(consultRepository);
 
-        super(consultRepository );
-        this.consultRepository = consultRepository;
-        this.processRepository = processRepository;
-        this.doctorRepository = doctorRepository;
+
     }
 
     @Override
     protected void saveDependencies(ConsultModel consult)  { }
 
     @Override
-    protected void validateFields(ConsultModel model) { }
+    protected void validateFields(ConsultModel model)  {
+
+
+    }
 
 
 
