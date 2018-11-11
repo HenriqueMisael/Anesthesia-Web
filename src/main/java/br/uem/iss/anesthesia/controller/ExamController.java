@@ -5,10 +5,13 @@ import br.uem.iss.anesthesia.model.entity.ExamModel;
 import br.uem.iss.anesthesia.model.repository.ExamRepository;
 import br.uem.iss.anesthesia.view.ExamFormView;
 import br.uem.iss.anesthesia.view.ExamIndexView;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -33,6 +36,19 @@ public class ExamController {
         return viewWithoutMessage(new ExamModel());
     }
 
+    @GetMapping("/get")
+    @ResponseBody
+    public Iterable<ExamModel> getMedicalProcedureExam() {
+        try{
+            Iterable<ExamModel> exam;
+
+            exam = ExamRepository.findByActiveTrue();
+            return exam;
+        }catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
+            return null;
+        }
+    }
 //    @GetMapping("/new")
     //    public AbstractModelAndView newDoctor() {
 //        return viewWithoutMessage(new DoctorModel());

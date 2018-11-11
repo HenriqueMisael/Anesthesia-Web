@@ -1,10 +1,8 @@
 package br.uem.iss.anesthesia.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 @Table(name="Process")
@@ -14,10 +12,10 @@ public class ProcessModel extends DefaultModel {
     private DoctorModel doctor;
     @OneToOne
     private PatientModel patient;
-//    @OneToOne
-//    private MedicalProcedureModel medicalProcedure;
-//    @OneToMany(fetch = FetchType.LAZY)
-//    private List<ExamProcessModel> exams;
+    @OneToOne
+    private MedicalProcedureModel medicalProcedure;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ExamModel> exams;
     private boolean active = true;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar inicialDate;
@@ -57,6 +55,22 @@ public class ProcessModel extends DefaultModel {
 
     public void inactivate() {
         active = false;
+    }
+
+    public MedicalProcedureModel getMedicalProcedure() {
+        return medicalProcedure;
+    }
+
+    public void setMedicalProcedure(MedicalProcedureModel medicalProcedure) {
+        this.medicalProcedure = medicalProcedure;
+    }
+
+    public List<ExamModel> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<ExamModel> exams) {
+        this.exams = exams;
     }
 
     @Override

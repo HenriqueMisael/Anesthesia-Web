@@ -14,6 +14,9 @@ public class DoctorModel extends DefaultModel {
 
     private String name;
     private String crm;
+    private String phoneNumber;
+    private String cellphoneNumber;
+    private String email;
     private boolean segundaManha;
     private boolean segundaTarde;
     private boolean tercaManha;
@@ -175,5 +178,29 @@ public class DoctorModel extends DefaultModel {
 
     public void setDomingoTarde(boolean domingoTarde) {
         this.domingoTarde = domingoTarde;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCellphoneNumber() {
+        return cellphoneNumber;
+    }
+
+    public void setCellphoneNumber(String cellphoneNumber) {
+        this.cellphoneNumber = cellphoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

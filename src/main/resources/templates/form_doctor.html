@@ -17,15 +17,6 @@
             <!--<th:block th:include="message"></th:block>-->
             <form action="#" th:action="@{/doctor}" th:object="${doctor}" method="POST" id="form_doctor">
                 <input id="id" th:field="*{id}" type="hidden">
-                <!--<div class="row">-->
-                    <!--<div class="input-field col s2">-->
-                        <!--<select id="active" th:field="*{active}" required>-->
-                            <!--<option value="1" selected>Sim</option>-->
-                            <!--<option value="0">Não</option>-->
-                        <!--</select>-->
-                        <!--<label for="active">Ativo</label>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="name" th:field="*{name}" type="text" required>
@@ -34,6 +25,20 @@
                     <div class="input-field col s6">
                         <input id="crm" th:field="*{crm}" type="text" required>
                         <label for="crm">CRM</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="phoneNumber" th:field="*{phoneNumber}" type="text">
+                        <label for="phoneNumber">Telefone Residencial</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="cellphoneNumber" th:field="*{cellphoneNumber}" type="text">
+                        <label for="cellphoneNumber">Telefone Celular</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="email" th:field="*{email}" type="email">
+                        <label for="email">E-mail</label>
                     </div>
                 </div>
                 <span class="erro_atendimento" style="color: #F44336" hidden>Por favor, preencha um dia de atendimento</span>
