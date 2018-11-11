@@ -41,40 +41,43 @@
                     </div>
                 </form>
             </div>
-            <table>
-                <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Nome</th>
-                    <th>Sobrenome</th>
-                    <th><a href="/patient/new" class="tooltipped btn-floating btn-small waves-effect waves-light blue"
-                           data-tooltip="Abrir a tela de cadastro de um novo paciente"><i
-                            class="material-icons">add</i></a>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="patient : ${patients}">
-                    <td><span th:text="${patient.id}"></span></td>
-                    <td><span th:text="${patient.name}"></span></td>
-                    <td><span th:text="${patient.surname}"></span></td>
-                    <td>
-                        <a class="btn-floating btn-small waves-effect waves-light blue delete tooltipped"
-                           th:data-tooltip="${'Inativar o cadastro do paciente ' + patient.name}"
-                           th:data-url="${(#mvc.url('PC#deletePatient').arg(0, patient.id)).build()}"><i
-                                class="material-icons">delete</i></a>
-                        <a class="btn-floating btn-small waves-effect waves-light blue tooltipped"
-                           th:data-tooltip="${'Abrir a tela de edição dos dados do paciente ' + patient.name}"
-                           th:href="${(#mvc.url('PC#editPatient').arg(0, patient.id)).build()}"><i
-                                class="material-icons">edit</i></a>
-                        <a class="btn-floating btn-small waves-effect waves-light blue tooltipped"
-                           th:data-tooltip="${'Imprimir a ficha do paciente ' + patient.name}" target="_blank"
-                           th:href="${'/report/patient-registry/' + patient.id}"><i
-                                class="material-icons">local_printshop</i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table style="table-layout: fixed">
+                    <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th><a href="/patient/new"
+                               class="tooltipped btn-floating btn-small waves-effect waves-light blue"
+                               data-tooltip="Abrir a tela de cadastro de um novo paciente"><i
+                                class="material-icons">add</i></a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="patient : ${patients}">
+                        <td><span th:text="${patient.id}"></span></td>
+                        <td><span th:text="${patient.name}"></span></td>
+                        <td><span th:text="${patient.surname}"></span></td>
+                        <td>
+                            <a class="btn-floating btn-small waves-effect waves-light blue delete tooltipped"
+                               th:data-tooltip="${'Inativar o cadastro do paciente ' + patient.name}"
+                               th:data-url="${(#mvc.url('PC#deletePatient').arg(0, patient.id)).build()}"><i
+                                    class="material-icons">delete</i></a>
+                            <a class="btn-floating btn-small waves-effect waves-light blue tooltipped"
+                               th:data-tooltip="${'Abrir a tela de edição dos dados do paciente ' + patient.name}"
+                               th:href="${(#mvc.url('PC#editPatient').arg(0, patient.id)).build()}"><i
+                                    class="material-icons">edit</i></a>
+                            <a class="btn-floating btn-small waves-effect waves-light blue tooltipped"
+                               th:data-tooltip="${'Imprimir a ficha do paciente ' + patient.name}" target="_blank"
+                               th:href="${'/report/patient-registry/' + patient.id}"><i
+                                    class="material-icons">local_printshop</i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
