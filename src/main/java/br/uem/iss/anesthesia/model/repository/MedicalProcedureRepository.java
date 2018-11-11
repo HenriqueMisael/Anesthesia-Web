@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface MedicalProcedureRepository extends CrudRepository<MedicalProcedureModel, Long> {
 
     Optional<BackgroundModel> findByName(String name);
+
+    Iterable<MedicalProcedureModel> findByActiveTrue();
 }

@@ -6,15 +6,16 @@ import br.uem.iss.anesthesia.model.entity.ProcessModel;
 import br.uem.iss.anesthesia.model.repository.DoctorRepository;
 import br.uem.iss.anesthesia.model.repository.PatientRepository;
 import br.uem.iss.anesthesia.model.repository.ProcessRepository;
+import br.uem.iss.anesthesia.model.repository.MedicalProcedureRepository;
 import br.uem.iss.anesthesia.view.ProcessFormView;
 import br.uem.iss.anesthesia.view.ProcessIndexView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/process")
@@ -32,8 +33,11 @@ public class ProcessController {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private MedicalProcedureRepository medicalProcedureRepository;
+
     @GetMapping
-    public ModelAndView listDoctors(@RequestParam(value = "filtro_codigo", required = false) String codigo,
+    public ModelAndView listProcess(@RequestParam(value = "filtro_codigo", required = false) String codigo,
                                     @RequestParam(value = "filtro_nome_paciente", required = false) String nome_paciente,
                                     @RequestParam(value = "filtro_nome_medico", required = false) String nome_medico) {
         Iterable<ProcessModel> process;
@@ -44,24 +48,25 @@ public class ProcessController {
 
     @GetMapping("/new")
     public ModelAndView newDoctor() {
-        return viewWithoutMessage(new ProcessModel());
+        return viewWithoutMessage(new ProcessModel(), "Adicionar ");
     }
 
     @GetMapping("/{id}")
     public ModelAndView editProcess(@PathVariable Long id) {
-        return viewWithoutMessage(processRepository.findById(id).get());
+        return viewWithoutMessage(processRepository.findById(id).get(), "Editar ");
     }
-//
-//    @PostMapping
-//    public AbstractModelAndView savePatient(@Valid DoctorModel doctor) {
-//        try {
-//            saveDoctorBusiness.save(doctor);
-//            return listDoctors(null, null);
-//        } catch (BusinessRuleException e) {
-//            return viewWithMessage(doctor, e.getMessage());
-//        }
-//    }
-//
+
+    @PostMapping
+    public ModelAndView savePatient(@RequestBody ProcessModel process) {
+        try {
+            System.out.println(process);
+//            saveProcessBusiness.save(process);
+            return listProcess(null, null, null);
+        } catch (Exception e) {
+            return viewWithMessage(null, e.getMessage(), "Adicionar ");
+        }
+    }
+
     @GetMapping("/delete/{id}")
     public ModelAndView deleteProcess(@PathVariable Long id) {
         ProcessModel process = processRepository.findById(id).get();
@@ -69,15 +74,17 @@ public class ProcessController {
         try {
             saveProcessBusiness.save(process);
         } catch (BusinessRuleException e) {
+
         }
         return new ProcessIndexView(processRepository.findByActiveTrue(), null, null, null);
     }
 
-    private ProcessFormView viewWithoutMessage(ProcessModel process) {
-        return viewWithMessage(process, null);
+    private ProcessFormView viewWithoutMessage(ProcessModel process, String metodo) {
+        return viewWithMessage(process, null, metodo);
     }
 
-    private ProcessFormView viewWithMessage(ProcessModel process, String message) {
-        return new ProcessFormView(process, message, doctorRepository.findByActiveTrue(), patientRepository.findByActiveTrue());
+    private ProcessFormView viewWithMessage(ProcessModel process, String message, String metodo) {
+        return new ProcessFormView(metodo, process, message, doctorRepository.findByActiveTrue(), patientRepository.findByActiveTrue(),
+                medicalProcedureRepository.findByActiveTrue());
     }
 }

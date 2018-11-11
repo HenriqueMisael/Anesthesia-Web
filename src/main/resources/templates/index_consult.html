@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="corpo">
+
+    <div class="container">
+        <div id='calendar'></div>
+        <div class="row">
+            <h2 class="center">Consultas Médicas</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb">Consultas Médicas</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <form method="get">
+                    <div class="input-field col s3">
+                        <input id="codigo" name="codigo" type="text">
+                        <label for="codigo">Código</label>
+                    </div>
+                    <div class="input-field col s8">
+                        <input id="name" name="name" type="text">
+                        <label for="name">Número</label>
+                    </div>
+                    <div class="col s1">
+                        <div class="row">
+                            <div class="col s6">
+                                <a href="/exam" class="btn-floating btn-large waves-effect waves-light blue"><i
+                                        class="material-icons">clear_all</i></a>
+                            </div>
+                            <div class="col s6">
+                                <button type="submit" class="btn-floating btn-large waves-effect waves-light blue"><i
+                                        class="material-icons">done</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Número</th>
+                    <th><a href="/consult/new" class="btn-floating btn-small waves-effect waves-light blue"><i
+                            class="material-icons">add</i></a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="consult : ${consults}">
+                    <td><span th:text="${consults.id}"></span></td>
+                    <td><span th:text="${consults.number}"></span></td>
+                    <td>
+                        <a class="btn-floating btn-small waves-effect waves-light blue delete"
+                           th:data-url="${(#mvc.url('CC#deleteConsult').arg(0, consult.id)).build()}"><i
+                                class="material-icons">delete</i></a>
+                        <a class="btn-floating btn-small waves-effect waves-light blue"
+                           th:href="${(#mvc.url('CC#editConsult').arg(0, consult.id)).build()}"><i
+                                class="material-icons">edit</i></a>
+                        <a class="btn-floating btn-small waves-effect waves-light blue"
+                           th:href="${'/report/consult-registry/' + consult.id}"><i
+                                class="material-icons">local_printshop</i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/medicalProcedure")
@@ -65,5 +66,19 @@ public class MedicalProcedureController {
         Iterable<ExamModel> exams = examRepository.findAll();
 
         return new MedicalProcedureFormView(medicalProcedure, message, exams);
+    }
+
+    @GetMapping("/find/{id}")
+    @ResponseBody
+    public Optional<MedicalProcedureModel> getMedicalProcedure(@PathVariable Long id) {
+        try{
+            Optional<MedicalProcedureModel> medicalProcedure;
+
+            medicalProcedure = medicalProcedureRepository.findById(id);
+            return medicalProcedure;
+        }catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
+            return null;
+        }
     }
 }

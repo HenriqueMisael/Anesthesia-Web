@@ -19,6 +19,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <select name="doctor" id="doctor">
+                            <option value="">Selecione um Médico</option>
                             <option th:each     ="doctor : ${doctors}"
                                     th:selected ="${doctor == process.doctor}"
                                     th:value    ="${doctor.id}"
@@ -29,6 +30,7 @@
                     </div>
                     <div class="input-field col s6">
                         <select name="patient" id="patient">
+                            <option value="">Selecione um Paciente</option>
                             <option th:each     ="patient : ${patients}"
                                     th:selected ="${patient == process.patient}"
                                     th:value    ="${patient.id}"
@@ -37,10 +39,34 @@
                         <label for="patient">Paciente</label>
                     </div>
                 </div>
-                <button class="waves-effect waves-light btn" type="button" onclick="validaform()">Salvar
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name="medicalProcedure" id="medicalProcedure">
+                            <option value="">Selecione um Procedimento</option>
+                            <option th:each     ="medicalprocedure : ${medicalprocedures}"
+                                    th:selected ="${medicalprocedure == process.medicalProcedure}"
+                                    th:value    ="${medicalprocedure.id}"
+                                    th:text     ="${medicalprocedure.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <h5>Exames:</h5>
+                <table id="table_exames">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tempo de Jejum</th>
+                            <th>Aprovado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <button class="waves-effect waves-light btn" type="button" id="btn_salvar">Salvar
                     <i class="material-icons right">send</i>
                 </button>
-                <a href="/doctor" class="waves-effect waves-light btn">Voltar</a>
+                <a href="/process" class="waves-effect waves-light btn">Voltar</a>
             </form>
         </div>
     </div>

@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     ativaDatePicker();
 });
 
+var url = (window.location.href).split('/');
+var URL_BASE = url[0]+'//'+url[1]+url[2];
+
 /**
  * Está função foi necessária pois o framework Materialize utiliza um padrão de checkbox e o Thymeleaf quebra o
  * padrão utilizado no materialize. O Thymeleaf, cria inputs com tipo hidden junto com os checkbox,
