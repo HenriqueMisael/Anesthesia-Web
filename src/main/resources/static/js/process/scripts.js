@@ -1,81 +1,109 @@
-function configConExams(id){
+var $MEDICAL_PROCEDURE      = $('#medicalProcedure');
+var $DOCTOR                 = $('#doctor');
+var $PATIENT                = $('#patient');
+var $TABLE_EXAMES           = $('#table_exames');
+var $BTN_SALVAR             = $('#btn_salvar');
+var processo = {
+    medicalProcedure: {},
+    doctor: {},
+    patient: {},
+    procesexams: []
+};
 
-    //Essa configuração realiza o consulta sempre assim que o resultado finalizar
-    $('#select-exams').select2({
+function changeDoctor(){
+    processo.doctor = parseFloat($DOCTOR.val());
+}
 
-        ajax: {
-            url: 'http://localhost:8080/exam/get/'+id,
-            dataType: 'json',
-            data: function (params) {
-                var query = {
-                    search: params.term,
-                    page: params.page || 1
+function changePatient(){
+    processo.patient = parseFloat($PATIENT.val());
+}
+
+function changeMedicalProcedure(idMedicalprocedure){
+    processo.medicalProcedure = parseFloat($MEDICAL_PROCEDURE.val());
+    var request = $.ajax({
+        url: URL_BASE+"/medicalProcedure/find/"+idMedicalprocedure,
+        method: 'get',
+        statusCode:{
+            200: function (data) {
+                if(data !== null){
+                    preencherTabelaExames(data.exams);
                 }
-                return query;
-
             },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-
-                //Verifica se é a última página para adicionar o botão de adicionar um novo cliente
-                // if((params.page * 5) >= data.total){
-                //     data.data.push(getBtnAdicionarModal('btn-md-add-pessoa'))
-                // }
-                return {
-                    results: data.data,
-                    pagination: {
-                        more: (params.page * 5) < data.total
-                    }
-                };
-            },
-            cache: true
-        },
-        placeholder: "Informe o exame ...",
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-        minimumInputLength: 0,
-        templateResult: formatRepo,
-        templateSelection: formatRepoSelection,
-        language: 'pt-BR'
-
-
-    });
-
-
-}
-
-function formatRepo (repo) {
-    if (repo.loading) {
-        return repo.text;
-    }
-
-    var markup = "";
-
-    if(repo.id == 0 ){
-        markup = repo.body;
-    }else{
-        markup = "<div class='select2-result-repository clearfix'>" +
-            //            "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
-            "<div class='select2-result-repository__meta'>" +
-            "<div class='select2-result-repository__title'>" + repo.nome + "</div>";
-
-        if (repo.description) {
-            markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+            500: function (data_error) {
+                console.log(data_error)
+            }
         }
-
-        markup += "<div class='select2-result-repository__statistics'>" +
-            "<div class='select2-result-repository__forks'><i class='fa fa-map-marker'></i> " + repo.endereco + "</div>" +
-            "<div class='select2-result-repository__stargazers'><i class='fa fa-phone'></i> " + repo.telefone + "</div>" +
-            "</div>" +
-            "</div></div>";
-    }
-
-
-
-    return markup;
+    });
+    request.always(function () {
+    });
 }
 
-function formatRepoSelection (repo) {
-    return repo.nome || repo.text;
+
+$MEDICAL_PROCEDURE.on('change', function () {
+    var idMedicalprocedure = $(this).val();
+    changeMedicalProcedure(idMedicalprocedure);
+});
+
+$DOCTOR.on('change', function () {
+    changeDoctor();
+});
+
+$PATIENT.on('change', function () {
+    changePatient();
+});
+
+$BTN_SALVAR.on('click', function () {
+    clickBtnSalvar();
+});
+
+function preencherTabelaExames(exames) {
+    for(var i =0; i<exames.length; i++){
+        processo.procesexams.push({exams: exames[i].id,
+            approved: false});
+        incluirLinhaTabelaExames(exames[i]);
+    }
+}
+
+function incluirLinhaTabelaExames(exame){
+    var newRow = $("<tr id='tr-exame-"+exame.id+"' >");
+    var cols = "";
+    cols += '<td class="nome_exam">'+exame.name+'</td>';
+    cols += '<td class="tempo_jejum">'+exame.jejumTime+'</td>';
+    cols += '<td class="aprovado">'+'<p><label><input type="checkbox" class="filled-in"><span></span></label></p>'+'</td>';
+
+    newRow.append(cols);
+    $TABLE_EXAMES.append(newRow);
+}
+
+function clickBtnSalvar(){
+    var request = $.ajax({
+        url: URL_BASE+"/process",
+        method: 'POST',
+        data: processo,
+        dataType: 'json',
+        contentType: "application/json",
+        processData: true,
+        statusCode:{
+            200: function (data) {
+                console.log(data);
+            },
+            500: function (data_error) {
+                console.log(data_error)
+            }
+        }
+    });
+    request.always(function () {
+    });
+}
+
+function montarForm(){
+    var form = new FormData();
+    form.append('medicalProcedure', processo.medicalProcedure);
+    form.append('doctor', processo.doctor);
+    form.append('patient', processo.patient);
+    for(var i = 0; i < processo.procesexams.length; i++){
+        form.append('procesexams['+i+'].exams', processo.procesexams[i].exams);
+        form.append('procesexams['+i+'].approved', processo.procesexams[i].approved);
+    }
+    return form;
 }

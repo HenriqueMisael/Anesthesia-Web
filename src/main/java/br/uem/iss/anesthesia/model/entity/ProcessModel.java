@@ -15,7 +15,7 @@ public class ProcessModel extends DefaultModel {
     @OneToOne
     private MedicalProcedureModel medicalProcedure;
     @OneToMany(fetch = FetchType.LAZY)
-    private List<ExamModel> exams;
+    private List<ProcessExamsModel> procesexams;
     private boolean active = true;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar inicialDate;
@@ -65,16 +65,25 @@ public class ProcessModel extends DefaultModel {
         this.medicalProcedure = medicalProcedure;
     }
 
-    public List<ExamModel> getExams() {
-        return exams;
+    public List<ProcessExamsModel> getProcesexams() {
+        return procesexams;
     }
 
-    public void setExams(List<ExamModel> exams) {
-        this.exams = exams;
+    public void setProcesexams(List<ProcessExamsModel> procesexams) {
+        this.procesexams = procesexams;
     }
 
     @Override
     public String toString() {
-        return "Ativo: " + this.active + ", Doctor: " + this.doctor+ ", Paciente: " + this.patient.getName();
+        return "ProcessModel{" +
+                "doctor=" + doctor +
+                ", patient=" + patient +
+                ", medicalProcedure=" + medicalProcedure +
+                ", procesexams=" + procesexams +
+                ", active=" + active +
+                ", inicialDate=" + inicialDate +
+                '}';
     }
+
+
 }

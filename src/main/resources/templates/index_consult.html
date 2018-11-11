@@ -1,14 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
+
     <div th:fragment="corpo">
+
     <div class="container">
+        <div id='calendar'></div>
         <div class="row">
-            <h2 class="center">Cadastro de Exames</h2>
+            <h2 class="center">Consultas Médicas</h2>
             <div class="row">
                 <nav>
                     <div class="nav-wrapper blue darken-1">
                         <div class="col s12">
                             <a class="breadcrumb" th:href="@{/}">Home</a>
-                            <a class="breadcrumb">Cadastro de Exames</a>
+                            <a class="breadcrumb">Consultas Médicas</a>
                         </div>
                     </div>
                 </nav>
@@ -21,7 +24,7 @@
                     </div>
                     <div class="input-field col s8">
                         <input id="name" name="name" type="text">
-                        <label for="name">Nome</label>
+                        <label for="name">Número</label>
                     </div>
                     <div class="col s1">
                         <div class="row">
@@ -41,25 +44,25 @@
                 <thead>
                 <tr>
                     <th>Código</th>
-                    <th>Nome</th>
-                    <th><a href="/exam/new" class="btn-floating btn-small waves-effect waves-light blue"><i
+                    <th>Número</th>
+                    <th><a href="/consult/new" class="btn-floating btn-small waves-effect waves-light blue"><i
                             class="material-icons">add</i></a>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="exam : ${exams}">
-                    <td><span th:text="${exam.id}"></span></td>
-                    <td><span th:text="${exam.name}"></span></td>
+                <tr th:each="consult : ${consults}">
+                    <td><span th:text="${consults.id}"></span></td>
+                    <td><span th:text="${consults.number}"></span></td>
                     <td>
                         <a class="btn-floating btn-small waves-effect waves-light blue delete"
-                           th:data-url="${(#mvc.url('EC#deleteExam').arg(0, exam.id)).build()}"><i
+                           th:data-url="${(#mvc.url('CC#deleteConsult').arg(0, consult.id)).build()}"><i
                                 class="material-icons">delete</i></a>
                         <a class="btn-floating btn-small waves-effect waves-light blue"
-                           th:href="${(#mvc.url('EC#editExam').arg(0, exam.id)).build()}"><i
+                           th:href="${(#mvc.url('CC#editConsult').arg(0, consult.id)).build()}"><i
                                 class="material-icons">edit</i></a>
                         <a class="btn-floating btn-small waves-effect waves-light blue"
-                           th:href="${'/report/exam-registry/' + exam.id}"><i
+                           th:href="${'/report/consult-registry/' + consult.id}"><i
                                 class="material-icons">local_printshop</i></a>
                     </td>
                 </tr>

@@ -12,6 +12,7 @@ import br.uem.iss.anesthesia.view.ProcessIndexView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -56,12 +57,13 @@ public class ProcessController {
     }
 
     @PostMapping
-    public ModelAndView savePatient(@Valid ProcessModel process) {
+    public ModelAndView savePatient(@RequestBody ProcessModel process) {
         try {
-            saveProcessBusiness.save(process);
+            System.out.println(process);
+//            saveProcessBusiness.save(process);
             return listProcess(null, null, null);
-        } catch (BusinessRuleException e) {
-            return viewWithMessage(process, e.getMessage(), "Adicionar ");
+        } catch (Exception e) {
+            return viewWithMessage(null, e.getMessage(), "Adicionar ");
         }
     }
 

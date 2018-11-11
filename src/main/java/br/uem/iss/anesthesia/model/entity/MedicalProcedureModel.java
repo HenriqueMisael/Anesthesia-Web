@@ -45,9 +45,9 @@ public class MedicalProcedureModel extends DefaultModel {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof BackgroundModel))
+        if (!(o instanceof MedicalProcedureModel))
             return false;
-        BackgroundModel that = (BackgroundModel) o;
+        MedicalProcedureModel that = (MedicalProcedureModel) o;
         return Objects.equals(getName(), that.getName());
     }
 
