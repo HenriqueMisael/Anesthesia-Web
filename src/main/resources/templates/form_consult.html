@@ -8,13 +8,13 @@
                     <div class="nav-wrapper blue darken-1">
                         <div class="col s12">
                             <a class="breadcrumb" th:href="@{/}">Home</a>
-                            <a class="breadcrumb">Cadastro de Exames</a>
+                            <a class="breadcrumb">Cadastro de Consulta</a>
                         </div>
                     </div>
                 </nav>
             </div>
             <th:block th:include="message"></th:block>
-            <form action="#" th:action="@{/exam}" th:object="${exam}" method="post">
+            <form action="#" th:action="@{/consult}" th:object="${consult}" method="post">
                 <input id="id" th:field="*{id}" type="hidden">
                 <div class="row">
                     <div class="input-field col s6">
@@ -41,7 +41,7 @@
                 <button class="waves-effect waves-light btn" type="submit">Salvar
                     <i class="material-icons right">send</i>
                 </button>
-                <a href="/exam" class="waves-effect waves-light btn">Voltar</a>
+                <a href="/consult" class="waves-effect waves-light btn">Voltar</a>
             </form>
         </div>
     </div>
