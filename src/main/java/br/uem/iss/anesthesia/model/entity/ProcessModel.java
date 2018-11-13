@@ -14,7 +14,7 @@ public class ProcessModel extends DefaultModel {
     private PatientModel patient;
     @OneToOne
     private MedicalProcedureModel medicalProcedure;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<ProcessExamsModel> procesexams;
     private boolean active = true;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -85,5 +85,14 @@ public class ProcessModel extends DefaultModel {
                 '}';
     }
 
+    public ProcessModel(DoctorModel doctor, PatientModel patient, MedicalProcedureModel medicalProcedure, List<ProcessExamsModel> procesexams, boolean active) {
+        this.doctor = doctor;
+        this.patient = patient;
+        this.medicalProcedure = medicalProcedure;
+        this.procesexams = procesexams;
+        this.active = active;
+    }
 
+    public ProcessModel() {
+    }
 }

@@ -221,6 +221,13 @@ public class PatientModel extends DefaultModel {
 
     @Override
     public String toString() {
-        return getName() + " " + getSurname();
+        return "Id: "+getId()+getName() + " " + getSurname();
+    }
+
+    public PatientModel(Long id) {
+        this.setId(id);
+    }
+
+    public PatientModel() {
     }
 }

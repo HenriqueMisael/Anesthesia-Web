@@ -30,4 +30,7 @@ public class DefaultModel implements Serializable, Cloneable {
     public boolean isNew() {
         return id == null;
     }
+
+    public DefaultModel() {
+    }
 }

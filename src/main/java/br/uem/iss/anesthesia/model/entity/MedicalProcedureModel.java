@@ -58,6 +58,13 @@ public class MedicalProcedureModel extends DefaultModel {
 
     @Override
     public String toString() {
-        return getName();
+        return "Id: "+getId()+" Nome: "+getName();
+    }
+
+    public MedicalProcedureModel() {
+    }
+
+    public MedicalProcedureModel(Long id) {
+        this.setId(id);
     }
 }
