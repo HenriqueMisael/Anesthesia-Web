@@ -1,7 +1,6 @@
 package br.uem.iss.anesthesia.model.repository;
 
 import br.uem.iss.anesthesia.model.entity.AppointmentModel;
-import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +12,4 @@ public interface AppointmentRepository extends CrudRepository<AppointmentModel, 
 
     List<AppointmentModel> findByDateBetween(LocalDateTime initial, LocalDateTime end);
 
-    List<AppointmentModel> findByDoctorAndDateBetween(DoctorModel doctor, LocalDateTime initial, LocalDateTime end);
 }

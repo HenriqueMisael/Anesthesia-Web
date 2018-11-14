@@ -1,6 +1,6 @@
 package br.uem.iss.anesthesia.view;
 
-import br.uem.iss.anesthesia.model.entity.*;
+        import br.uem.iss.anesthesia.model.entity.*;
 
 public class PatientView extends AbstractModelAndView {
 

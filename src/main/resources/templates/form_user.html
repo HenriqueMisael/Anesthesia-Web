@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Cadastro de Usuário</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb" th:href="@{/user}">Usuários</a>
+                            <a class="breadcrumb">Cadastro de Usuário</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <th:block th:include="message"></th:block>
+            <form action="#" th:action="@{/user}" th:object="${user}" method="POST">
+                <input id="id" th:field="*{id}" type="hidden">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="name" th:field="*{login}" type="text">
+                        <label for="name">Login</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="password" th:field="*{password}" type="password">
+                        <label for="password">Senha</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select id="userType" th:field="*{userType}">
+                            <option th:each="userTypeOption : ${userTypeOptions}" th:value="${{userTypeOption}}"
+                                    th:text="${userTypeOption}">
+                            </option>
+                        </select>
+                        <label for="userType">Tipo Usuário</label>
+                    </div>
+                </div>
+                <button class="waves-effect waves-light btn" type="submit">Salvar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a href="/user" class="waves-effect waves-light btn">Voltar</a>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/form_background.js}"></script>
+</div>
+
+</html>
