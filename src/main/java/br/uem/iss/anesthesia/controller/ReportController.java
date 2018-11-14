@@ -1,7 +1,7 @@
 package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.controller.request.PatientReportRequest;
-import br.uem.iss.anesthesia.model.AppointmentModel;
+import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import br.uem.iss.anesthesia.model.repository.AppointmentRepository;
 import br.uem.iss.anesthesia.model.repository.DoctorRepository;

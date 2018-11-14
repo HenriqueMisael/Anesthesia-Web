@@ -1,4 +1,4 @@
-package br.uem.iss.anesthesia.controller.request;
+package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SaveConsultBusiness;
 import br.uem.iss.anesthesia.model.business.SaveExamBusiness;
@@ -27,7 +27,9 @@ public class ConsultController {
 
     @Autowired
     private SaveConsultBusiness saveConsultBusiness;
+}
 
+/*
     @GetMapping
     public ModelAndView listConsult(@RequestParam(value = "filtro_number", required = false) String number, boolean ativo)  {
         Iterable<ConsultModel> consult;

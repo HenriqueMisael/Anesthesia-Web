@@ -1,6 +1,6 @@
 package br.uem.iss.anesthesia.model.repository;
 
-import br.uem.iss.anesthesia.model.AppointmentModel;
+import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package br.uem.iss.anesthesia.view;
 
-import br.uem.iss.anesthesia.model.AppointmentModel;
+import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import org.springframework.web.servlet.ModelAndView;
 

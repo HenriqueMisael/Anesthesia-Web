@@ -2,7 +2,7 @@
 <div th:fragment="corpo">
     <div class="container">
         <div class="row">
-            <h2 class="center">Cadastro de Exames</h2>
+            <h2 class="center">Cadastro de Consulta</h2>
             <div class="row">
                 <nav>
                     <div class="nav-wrapper blue darken-1">
@@ -14,35 +14,48 @@
                 </nav>
             </div>
             <th:block th:include="message"></th:block>
-            <form action="#" th:action="@{/consult}" th:object="${consult}" method="post">
+            <form action="#" th:action="@{/consults}" th:object="${consults}" method="post">
                 <input id="id" th:field="*{id}" type="hidden">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="name" th:field="*{name}" type="text">
-                        <label for="name">Nome</label>
+                        <select name="doctor" id="doctor">
+                            <option value="">Selecione um Médico</option>
+                            <option th:each     ="doctor : ${doctors}"
+                                    th:selected ="${doctor == process.doctor}"
+                                    th:value    ="${doctor.id}"
+                                    th:text     ="${doctor.name}">
+                            </option>
+                        </select>
+                        <label for="doctor">Médico</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="patient" id="patient">
+                            <option value="">Selecione um Paciente</option>
+                            <option th:each     ="patient : ${patients}"
+                                    th:selected ="${patient == process.patient}"
+                                    th:value    ="${patient.id}"
+                                    th:text     ="${patient.name}"></option>
+                        </select>
+                        <label for="patient">Paciente</label>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="description" th:field="*{description}" type="text">
-                        <label for="name">Descrição</label>
+                        <select name="medicalProcedure" id="medicalProcedure">
+                            <option value="">Selecione um Procedimento</option>
+                            <option th:each     ="medicalprocedure : ${medicalprocedures}"
+                                    th:selected ="${medicalprocedure == process.medicalProcedure}"
+                                    th:value    ="${medicalprocedure.id}"
+                                    th:text     ="${medicalprocedure.name}"></option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="jejum" th:field="*{jejumTime}" type="text">
-                        <label for="name">Tempo de jejum</label>
-                    </div>
-                </div>
-
-
-                <button class="waves-effect waves-light btn" type="submit">Salvar
-                    <i class="material-icons right">send</i>
-                </button>
-                <a href="/consult" class="waves-effect waves-light btn">Voltar</a>
             </form>
+            <button class="waves-effect waves-light btn" type="button" onclick="clickBtnSalvar()">Salvar
+                <i class="material-icons right">send</i>
+            </button>
+            <a href="/process" class="waves-effect waves-light btn">Voltar</a>
         </div>
     </div>
     <script th:src="@{/js/form_patient.js}"></script>

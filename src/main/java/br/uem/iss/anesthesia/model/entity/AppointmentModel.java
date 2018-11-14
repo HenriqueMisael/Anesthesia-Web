@@ -1,4 +1,4 @@
-package br.uem.iss.anesthesia.model;
+package br.uem.iss.anesthesia.model.entity;
 
 import br.uem.iss.anesthesia.model.entity.DefaultModel;
 import br.uem.iss.anesthesia.model.entity.DoctorModel;
@@ -9,28 +9,13 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Appointments")
+@Table(name = "Consults")
 public class AppointmentModel extends DefaultModel {
 
-    private PatientModel patient;
-    private DoctorModel doctor;
+    private ProcessModel process;
     private LocalDateTime date;
 
-    public PatientModel getPatient() {
-        return patient;
-    }
 
-    public void setPatient(PatientModel patient) {
-        this.patient = patient;
-    }
-
-    public DoctorModel getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(DoctorModel doctor) {
-        this.doctor = doctor;
-    }
 
     public LocalDateTime getDate() {
         return date;
@@ -38,5 +23,13 @@ public class AppointmentModel extends DefaultModel {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public ProcessModel getProcess() {
+        return process;
+    }
+
+    public void setProcess(ProcessModel process) {
+        this.process = process;
     }
 }
