@@ -14,7 +14,9 @@ var processo = {
     procesexams: []
 };
 $(document).ready(function () {
-   getForm();
+    if( window.location.href.split('/')[3]+'/'+window.location.href.split('/')[4] === 'process/new'){
+        getForm();
+    }
 });
 
 function getForm() {
