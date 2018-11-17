@@ -6,12 +6,11 @@ import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.ConsultModel;
 import br.uem.iss.anesthesia.model.entity.ExamModel;
+import br.uem.iss.anesthesia.model.entity.ProcessModel;
 import br.uem.iss.anesthesia.model.repository.ConsultRepository;
 import br.uem.iss.anesthesia.model.repository.ExamRepository;
-import br.uem.iss.anesthesia.view.ConsultFormView;
-import br.uem.iss.anesthesia.view.ConsultIndexView;
-import br.uem.iss.anesthesia.view.ExamFormView;
-import br.uem.iss.anesthesia.view.ExamIndexView;
+import br.uem.iss.anesthesia.model.repository.ProcessRepository;
+import br.uem.iss.anesthesia.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,23 +24,26 @@ public class ConsultController {
 
     @Autowired
     private ConsultRepository consultRepository;
+    private ProcessRepository processRepository;
 
     @Autowired
     private SaveConsultBusiness saveConsultBusiness;
 
 
 
+
+
     @GetMapping
-    public ModelAndView listConsult(@RequestParam(value = "filtro_number", required = false) String number, boolean ativo)  {
+    public ModelAndView listConsult(@RequestParam(value = "filtro_number", required = false) String number, String codigo,
+                                    String nome_paciente, String nome_medico)  {
         Iterable<AppointmentModel> consult;
-        number    = ((number == null) ? "" : number);
-        if (ativo) {
             consult = consultRepository.findAll();
-        }else{
-            consult = consultRepository.findAll();
-        }
-        return new ConsultIndexView(consult, number,true);
+        return new ConsultIndexView(consult, number,codigo,nome_paciente,nome_medico);
     }
+
+
+
+
 
     private ConsultFormView viewWithoutMessage(AppointmentModel consult) {
         return viewWithMessage(consult, null);
@@ -62,7 +64,7 @@ public class ConsultController {
     public ModelAndView saveConsult(@Valid AppointmentModel consult) {
         try {
             saveConsultBusiness.save(consult);
-            return listConsult(null,true);
+            return listConsult(null,null,null,null);
         } catch (BusinessRuleException e) {
             return viewWithMessage(consult, e.getMessage());
         }
@@ -76,7 +78,7 @@ public class ConsultController {
             saveConsultBusiness.save(consult);
         } catch (BusinessRuleException e) {
         }
-        return new ConsultIndexView(consultRepository.findByActiveTrue(),null, true);
+        return new ConsultIndexView(consultRepository.findByActiveTrue(),null, null,null,null);
     }
 
 }
