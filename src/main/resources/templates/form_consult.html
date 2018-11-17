@@ -15,29 +15,9 @@
             </div>
             <th:block th:include="message"></th:block>
             <form action="#" th:action="@{/consults}" th:object="${consults}" method="post">
-                <input id="id" th:field="*{id}" type="hidden">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <select name="doctor" id="doctor">
-                            <option value="">Selecione um Médico</option>
-                            <option th:each     ="doctor : ${doctors}"
-                                    th:selected ="${doctor == process.doctor}"
-                                    th:value    ="${doctor.id}"
-                                    th:text     ="${doctor.name}">
-                            </option>
-                        </select>
-                        <label for="doctor">Médico</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <select name="patient" id="patient">
-                            <option value="">Selecione um Paciente</option>
-                            <option th:each     ="patient : ${patients}"
-                                    th:selected ="${patient == process.patient}"
-                                    th:value    ="${patient.id}"
-                                    th:text     ="${patient.name}"></option>
-                        </select>
-                        <label for="patient">Paciente</label>
-                    </div>
+                <div class="input-field col s2">
+                    <input id="birthday" th:field="*{date}" type="text" class="datepicker">
+                    <label for="birthday">Data de Nascimento</label>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">

@@ -4,10 +4,7 @@ import br.uem.iss.anesthesia.model.business.exception.*;
 import br.uem.iss.anesthesia.model.business.validator.CpfValidator;
 import br.uem.iss.anesthesia.model.business.validator.NameNotNullValidator;
 import br.uem.iss.anesthesia.model.business.validator.SurnameNotNullValidator;
-import br.uem.iss.anesthesia.model.entity.BackgroundModel;
-import br.uem.iss.anesthesia.model.entity.ConsultModel;
-import br.uem.iss.anesthesia.model.entity.MedicineModel;
-import br.uem.iss.anesthesia.model.entity.PatientModel;
+import br.uem.iss.anesthesia.model.entity.*;
 import br.uem.iss.anesthesia.model.repository.ConsultRepository;
 import br.uem.iss.anesthesia.model.repository.DoctorRepository;
 import br.uem.iss.anesthesia.model.repository.PatientRepository;
@@ -20,7 +17,7 @@ import java.util.Set;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Service
-public class SaveConsultBusiness extends SaveModelBusiness<ConsultModel> {
+public class SaveConsultBusiness extends SaveModelBusiness<AppointmentModel> {
 
     private ConsultRepository consultRepository;
     private DoctorRepository doctorRepository;
@@ -35,10 +32,10 @@ public class SaveConsultBusiness extends SaveModelBusiness<ConsultModel> {
     }
 
     @Override
-    protected void saveDependencies(ConsultModel consult)  { }
+    protected void saveDependencies(AppointmentModel consult)  { }
 
     @Override
-    protected void validateFields(ConsultModel model)  {
+    protected void validateFields(AppointmentModel model)  {
 
 
     }

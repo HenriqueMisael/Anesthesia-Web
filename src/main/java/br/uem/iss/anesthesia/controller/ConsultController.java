@@ -3,6 +3,7 @@ package br.uem.iss.anesthesia.controller;
 import br.uem.iss.anesthesia.model.business.SaveConsultBusiness;
 import br.uem.iss.anesthesia.model.business.SaveExamBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
+import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.ConsultModel;
 import br.uem.iss.anesthesia.model.entity.ExamModel;
 import br.uem.iss.anesthesia.model.repository.ConsultRepository;
@@ -27,12 +28,12 @@ public class ConsultController {
 
     @Autowired
     private SaveConsultBusiness saveConsultBusiness;
-}
 
-/*
+
+
     @GetMapping
     public ModelAndView listConsult(@RequestParam(value = "filtro_number", required = false) String number, boolean ativo)  {
-        Iterable<ConsultModel> consult;
+        Iterable<AppointmentModel> consult;
         number    = ((number == null) ? "" : number);
         if (ativo) {
             consult = consultRepository.findAll();
@@ -42,14 +43,14 @@ public class ConsultController {
         return new ConsultIndexView(consult, number,true);
     }
 
-    private ConsultFormView viewWithoutMessage(ConsultModel consult) {
+    private ConsultFormView viewWithoutMessage(AppointmentModel consult) {
         return viewWithMessage(consult, null);
     }
-    private ConsultFormView viewWithMessage(ConsultModel consult, String message) { return new ConsultFormView(consult); }
+    private ConsultFormView viewWithMessage(AppointmentModel consult, String message) { return new ConsultFormView(consult); }
 
     @GetMapping("/new")
     public ModelAndView newConsult() {
-        return viewWithoutMessage(new ConsultModel());
+        return viewWithoutMessage(new AppointmentModel());
     }
 
     @GetMapping("/{id}")
@@ -58,7 +59,7 @@ public class ConsultController {
     }
 
     @PostMapping
-    public ModelAndView saveConsult(@Valid ConsultModel consult) {
+    public ModelAndView saveConsult(@Valid AppointmentModel consult) {
         try {
             saveConsultBusiness.save(consult);
             return listConsult(null,true);
@@ -69,7 +70,7 @@ public class ConsultController {
 
     @GetMapping("/delete/{id}")
     public ModelAndView deleteConsult(@PathVariable Long id) {
-        ConsultModel consult = consultRepository.findById(id).get();
+        AppointmentModel consult = consultRepository.findById(id).get();
         consult.inactivate();
         try {
             saveConsultBusiness.save(consult);
@@ -79,4 +80,4 @@ public class ConsultController {
     }
 
 }
-*/
+
