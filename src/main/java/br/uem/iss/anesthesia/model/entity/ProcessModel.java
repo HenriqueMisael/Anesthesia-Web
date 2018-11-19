@@ -20,6 +20,10 @@ public class ProcessModel extends DefaultModel {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar inicialDate;
 
+    public String getPacienteMedico(){
+        String texto = "Paciente: "+ this.getPatient().getName() + " | Médico: " + this.getDoctor().getName() ;
+        return texto;
+    }
 
     public DoctorModel getDoctor() {
         return doctor;

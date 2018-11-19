@@ -3,10 +3,7 @@ package br.uem.iss.anesthesia.controller;
 import br.uem.iss.anesthesia.model.business.SaveConsultBusiness;
 import br.uem.iss.anesthesia.model.business.SaveExamBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
-import br.uem.iss.anesthesia.model.entity.AppointmentModel;
-import br.uem.iss.anesthesia.model.entity.ConsultModel;
-import br.uem.iss.anesthesia.model.entity.ExamModel;
-import br.uem.iss.anesthesia.model.entity.ProcessModel;
+import br.uem.iss.anesthesia.model.entity.*;
 import br.uem.iss.anesthesia.model.repository.ConsultRepository;
 import br.uem.iss.anesthesia.model.repository.ExamRepository;
 import br.uem.iss.anesthesia.model.repository.ProcessRepository;
@@ -24,7 +21,8 @@ public class ConsultController {
 
     @Autowired
     private ConsultRepository consultRepository;
-    private ProcessRepository processRepository;
+    @Autowired
+    ProcessRepository processRepository;
 
     @Autowired
     private SaveConsultBusiness saveConsultBusiness;
@@ -45,10 +43,16 @@ public class ConsultController {
 
 
 
-    private ConsultFormView viewWithoutMessage(AppointmentModel consult) {
-        return viewWithMessage(consult, null);
+    private ConsultFormView viewWithoutMessage(AppointmentModel consult ) {
+        Iterable<ProcessModel> process = processRepository.findAll();
+        return new ConsultFormView(consult,process);
     }
-    private ConsultFormView viewWithMessage(AppointmentModel consult, String message) { return new ConsultFormView(consult); }
+
+    private ConsultFormView viewWithMessage(AppointmentModel consult, String message) {
+
+        Iterable<ProcessModel> process = processRepository.findAll();
+        return new ConsultFormView(consult,process);
+    }
 
     @GetMapping("/new")
     public ModelAndView newConsult() {
@@ -62,6 +66,7 @@ public class ConsultController {
 
     @PostMapping
     public ModelAndView saveConsult(@Valid AppointmentModel consult) {
+        System.out.println("ENTROU NO CONTROLE");
         try {
             saveConsultBusiness.save(consult);
             return listConsult(null,null,null,null);
