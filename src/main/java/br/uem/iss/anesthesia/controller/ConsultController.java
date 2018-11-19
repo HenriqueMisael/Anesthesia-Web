@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/consult")
-public class ConsultController {
+public class ConsultController extends AbstractController {
 
     @Autowired
     private ConsultRepository consultRepository;

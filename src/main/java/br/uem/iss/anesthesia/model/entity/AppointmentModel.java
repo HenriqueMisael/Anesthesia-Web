@@ -9,14 +9,22 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Consults")
+@Table(name = "consult")
 public class AppointmentModel extends DefaultModel {
 
     private ProcessModel process;
     private LocalDateTime date;
     private boolean active;
 
+    public AppointmentModel(ProcessModel process, LocalDateTime date, boolean active) {
+        this.process = process;
+        this.date = date;
+        this.active = active;
+    }
 
+    public AppointmentModel() {
+
+    }
 
     public LocalDateTime getDate() {
         return date;
