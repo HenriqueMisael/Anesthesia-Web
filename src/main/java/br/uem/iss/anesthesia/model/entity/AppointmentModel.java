@@ -16,11 +16,8 @@ public class AppointmentModel extends DefaultModel {
     private LocalDateTime date;
     private boolean active;
 
-    public AppointmentModel(ProcessModel process, LocalDateTime date, boolean active) {
-        this.process = process;
-        this.date = date;
-        this.active = active;
-    }
+
+
 
     public AppointmentModel() {
 

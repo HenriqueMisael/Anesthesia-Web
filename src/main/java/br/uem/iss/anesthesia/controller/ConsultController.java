@@ -1,11 +1,9 @@
 package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SaveConsultBusiness;
-import br.uem.iss.anesthesia.model.business.SaveExamBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.entity.*;
-import br.uem.iss.anesthesia.model.repository.ConsultRepository;
-import br.uem.iss.anesthesia.model.repository.ExamRepository;
+import br.uem.iss.anesthesia.model.repository.AppointmentRepository;
 import br.uem.iss.anesthesia.model.repository.ProcessRepository;
 import br.uem.iss.anesthesia.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,7 @@ import javax.validation.Valid;
 public class ConsultController extends AbstractController {
 
     @Autowired
-    private ConsultRepository consultRepository;
+    private AppointmentRepository consultRepository;
     @Autowired
     ProcessRepository processRepository;
 
@@ -83,7 +81,7 @@ public class ConsultController extends AbstractController {
             saveConsultBusiness.save(consult);
         } catch (BusinessRuleException e) {
         }
-        return new ConsultIndexView(consultRepository.findByActiveTrue(),null, null,null,null);
+        return new ConsultIndexView(consultRepository.findAll(),null, null,null,null);
     }
 
 }
