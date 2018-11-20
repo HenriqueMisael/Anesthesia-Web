@@ -54,16 +54,29 @@
                 <table id="table_exames">
                     <thead>
                         <tr>
+                            <th>Código</th>
                             <th>Nome</th>
                             <th>Tempo de Jejum</th>
                             <th>Aprovado</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        <tr th:each="processexam : *{procesexams}" th:id="${processexam.id}">
+                            <td><span th:text="${processexam.id}"></span></td>
+                            <td th:text="${processexam.exams.getName()}"><span></span></td>
+                            <td th:text="${processexam.exams.getJejumTime()}"><span></span></td>
+                            <td>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" th:checked="${processexam.approved}" class="filled-in approved_change" />
+                                        <span></span>
+                                    </label>
+                                </p>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <button class="waves-effect waves-light btn" type="button" id="btn_salvar">Salvar
+                <button class="waves-effect waves-light btn" type="button" onclick="clickBtnSalvar()">Salvar
                     <i class="material-icons right">send</i>
                 </button>
                 <a href="/process" class="waves-effect waves-light btn">Voltar</a>

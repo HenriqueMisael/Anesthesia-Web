@@ -3,9 +3,10 @@
     <div th:fragment="corpo">
 
     <div class="container">
-        <div id='calendar'></div>
+
         <div class="row">
             <h2 class="center">Consultas Médicas</h2>
+
             <div class="row">
                 <nav>
                     <div class="nav-wrapper blue darken-1">
@@ -29,7 +30,7 @@
                     <div class="col s1">
                         <div class="row">
                             <div class="col s6">
-                                <a href="/exam" class="btn-floating btn-large waves-effect waves-light blue"><i
+                                <a href="/consult" class="btn-floating btn-large waves-effect waves-light blue"><i
                                         class="material-icons">clear_all</i></a>
                             </div>
                             <div class="col s6">
@@ -51,9 +52,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="consult : ${consults}">
-                    <td><span th:text="${consults.id}"></span></td>
-                    <td><span th:text="${consults.number}"></span></td>
+                <tr th:each="consult : ${consult}">
+                    <td><span th:text="${consult.id}"></span></td>
                     <td>
                         <a class="btn-floating btn-small waves-effect waves-light blue delete"
                            th:data-url="${(#mvc.url('CC#deleteConsult').arg(0, consult.id)).build()}"><i
@@ -68,6 +68,7 @@
                 </tr>
                 </tbody>
             </table>
+            <div id='calendar'></div>
         </div>
     </div>
 </div>

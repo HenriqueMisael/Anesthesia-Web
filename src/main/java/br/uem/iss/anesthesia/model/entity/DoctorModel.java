@@ -64,7 +64,7 @@ public class DoctorModel extends DefaultModel {
 
     @Override
     public String toString() {
-        return "CRM: " + this.crm + ", Nome: " + this.name+ ", Ativo: " + this.active + ", Segunda Manhã: " + this.segundaManha
+        return "Id:"+ this.getId()+"CRM: " + this.crm + ", Nome: " + this.name+ ", Ativo: " + this.active + ", Segunda Manhã: " + this.segundaManha
                 + ", Segunda Tarde: " + this.segundaTarde;
     }
 
@@ -202,5 +202,12 @@ public class DoctorModel extends DefaultModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public DoctorModel() {
+    }
+
+    public DoctorModel(Long id) {
+        this.setId(id);
     }
 }

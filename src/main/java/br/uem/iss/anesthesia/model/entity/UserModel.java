@@ -9,6 +9,7 @@ import java.util.Objects;
 public class UserModel extends DefaultModel {
     private String login;
     private String password;
+    private UserType userType;
 
     public String getLogin() {
         return login;
@@ -24,6 +25,14 @@ public class UserModel extends DefaultModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     @Override

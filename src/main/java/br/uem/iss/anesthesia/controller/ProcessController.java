@@ -57,13 +57,14 @@ public class ProcessController {
     }
 
     @PostMapping
-    public ModelAndView savePatient(@RequestBody ProcessModel process) {
+    @ResponseBody
+    public ProcessModel saveProcess(@RequestBody ProcessModel process) {
         try {
-            System.out.println(process);
-//            saveProcessBusiness.save(process);
-            return listProcess(null, null, null);
+            saveProcessBusiness.save(process);
+            return process;
         } catch (Exception e) {
-            return viewWithMessage(null, e.getMessage(), "Adicionar ");
+            System.out.println("Deu erro: "+e.getMessage()+e.getClass());
+            return null;
         }
     }
 

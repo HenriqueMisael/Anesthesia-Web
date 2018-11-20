@@ -12,9 +12,13 @@ public class ExamModel extends DefaultModel{
     private boolean active;
 
 
-    public ExamModel(){
-
+    public ExamModel(Long id){
+        this.setId(id);
     }
+
+    public ExamModel() {
+    }
+
     public void inactivate() {
         active = false;
     }
@@ -43,5 +47,16 @@ public class ExamModel extends DefaultModel{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "ExamModel{" +
+                "Id: "+getId()+
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", jejumTime=" + jejumTime +
+                ", active=" + active +
+                '}';
     }
 }

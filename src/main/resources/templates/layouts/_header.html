@@ -1,4 +1,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel='stylesheet' th:href="@{/css/fullcalendar.css}" />
+<script th:src="@{/js/lib/jquery.min.js}"></script>
+<script th:src="@{/js/lib/moment.min.js}"></script>
+<script th:src="@{/js/fullcalendar.js}"></script>
+<script>
+    $(function() {
+
+        // page is now ready, initialize the calendar...
+
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here
+        })
+
+    });
+
+</script>
 <nav>
     <div class="nav-wrapper blue">
         <div class="container">

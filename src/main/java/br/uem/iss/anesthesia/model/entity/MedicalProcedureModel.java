@@ -13,7 +13,7 @@ import java.util.Set;
 public class MedicalProcedureModel extends DefaultModel {
 
     private String name;
-    private boolean active;
+    private boolean active = true;//O mateus mudou
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<ExamModel> exams;
 
@@ -58,6 +58,13 @@ public class MedicalProcedureModel extends DefaultModel {
 
     @Override
     public String toString() {
-        return getName();
+        return "Id: "+getId()+" Nome: "+getName();
+    }
+
+    public MedicalProcedureModel() {
+    }
+
+    public MedicalProcedureModel(Long id) {
+        this.setId(id);
     }
 }
