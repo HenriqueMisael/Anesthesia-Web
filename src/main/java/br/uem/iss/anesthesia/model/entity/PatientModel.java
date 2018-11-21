@@ -175,10 +175,6 @@ public class PatientModel extends DefaultModel {
         active = false;
     }
 
-    public void activate() {
-        active = true;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -191,7 +187,7 @@ public class PatientModel extends DefaultModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname());
+        return Objects.hash(getId());
     }
 
     @Override
