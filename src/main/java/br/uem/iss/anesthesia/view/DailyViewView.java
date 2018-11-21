@@ -1,6 +1,6 @@
 package br.uem.iss.anesthesia.view;
 
-import br.uem.iss.anesthesia.model.AppointmentModel;
+import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 
 import java.time.LocalDate;
 import java.util.Set;

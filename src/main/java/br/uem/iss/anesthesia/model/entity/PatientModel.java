@@ -32,6 +32,13 @@ public class PatientModel extends DefaultModel {
     private Set<MedicineModel> medicines;
     private boolean active = true;
 
+    public PatientModel() {
+    }
+
+    public PatientModel(Long id) {
+        this.setId(id);
+    }
+
     public String getName() {
         return name;
     }
@@ -221,13 +228,6 @@ public class PatientModel extends DefaultModel {
 
     @Override
     public String toString() {
-        return "Id: "+getId()+getName() + " " + getSurname();
-    }
-
-    public PatientModel(Long id) {
-        this.setId(id);
-    }
-
-    public PatientModel() {
+        return getName() + " " + getSurname();
     }
 }

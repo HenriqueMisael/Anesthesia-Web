@@ -1,8 +1,9 @@
 package br.uem.iss.anesthesia.controller;
 
-import br.uem.iss.anesthesia.model.AppointmentModel;
+import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import br.uem.iss.anesthesia.model.entity.PatientModel;
+import br.uem.iss.anesthesia.model.entity.ProcessModel;
 import br.uem.iss.anesthesia.view.AbstractModelAndView;
 import br.uem.iss.anesthesia.view.DailyViewView;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Controller
 @RequestMapping("/daily-view")
@@ -20,8 +21,15 @@ public class DailyViewController extends AbstractController {
 
     @GetMapping
     public AbstractModelAndView home() {
-        Set<AppointmentModel> morning = new HashSet<>();
-        Set<AppointmentModel> afternoon = new HashSet<>();
+        Set<AppointmentModel> morning = new TreeSet<>();
+        Set<AppointmentModel> afternoon = new TreeSet<>();
+
+        loadTestData(morning, afternoon);
+
+        return new DailyViewView(morning, afternoon, LocalDate.now());
+    }
+
+    private void loadTestData(Set<AppointmentModel> morning, Set<AppointmentModel> afternoon) {
         LocalDateTime time = LocalDate.now().atStartOfDay();
         DoctorModel doctor = new DoctorModel();
         doctor.setName("Doutor Médico");
@@ -39,7 +47,6 @@ public class DailyViewController extends AbstractController {
         afternoon.add(newAppointment(time.plusHours(5), doctor, newPatient("Stéphanie Caroline")));
         afternoon.add(newAppointment(time.plusHours(5).plusMinutes(30), doctor, newPatient("Alan Willian")));
         afternoon.add(newAppointment(time.plusHours(6), doctor, newPatient("Luciana Rathunde")));
-        return new DailyViewView(morning, afternoon, LocalDate.now());
     }
 
     private PatientModel newPatient(String name) {
@@ -49,10 +56,12 @@ public class DailyViewController extends AbstractController {
     }
 
     private AppointmentModel newAppointment(LocalDateTime date, DoctorModel doctor, PatientModel patient) {
+        ProcessModel processModel = new ProcessModel();
+        processModel.setDoctor(doctor);
+        processModel.setPatient(patient);
         AppointmentModel appointmentModel = new AppointmentModel();
-        appointmentModel.setDoctor(doctor);
         appointmentModel.setDate(date);
-        appointmentModel.setPatient(patient);
+        appointmentModel.setProcess(processModel);
         return appointmentModel;
     }
 }

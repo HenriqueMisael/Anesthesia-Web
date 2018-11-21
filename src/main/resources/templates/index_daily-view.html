@@ -21,8 +21,8 @@
                             <div class="card white">
                                 <div class="card-content blue-grey-text">
                                         <span class="card-title"
-                                              th:text="${#temporals.format(appointment.date, 'hh:mm') + ' ' + appointment.doctor.name}"></span>
-                                    <p th:text="${appointment.patient}"></p>
+                                              th:text="${#temporals.format(appointment.date, 'hh:mm') + ' ' + appointment.process.doctor.name}"></span>
+                                    <p th:text="${appointment.process.patient}"></p>
                                 </div>
                             </div>
                         </card>
@@ -35,8 +35,8 @@
                             <div class="card white">
                                 <div class="card-content blue-grey-text">
                                         <span class="card-title"
-                                              th:text="${#temporals.format(appointment.date, 'hh:mm') + ' ' + appointment.doctor.name}"></span>
-                                    <p th:text="${appointment.patient}"></p>
+                                              th:text="${#temporals.format(appointment.date, 'HH:mm') + ' ' + appointment.process.doctor.name}"></span>
+                                    <p th:text="${appointment.process.patient}"></p>
                                 </div>
                             </div>
                         </card>
