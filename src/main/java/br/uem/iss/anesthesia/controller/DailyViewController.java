@@ -4,6 +4,7 @@ import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import br.uem.iss.anesthesia.model.entity.PatientModel;
 import br.uem.iss.anesthesia.model.entity.ProcessModel;
+import br.uem.iss.anesthesia.model.repository.AppointmentRepository;
 import br.uem.iss.anesthesia.view.AbstractModelAndView;
 import br.uem.iss.anesthesia.view.DailyViewView;
 import org.springframework.stereotype.Controller;
@@ -19,14 +20,31 @@ import java.util.TreeSet;
 @RequestMapping("/daily-view")
 public class DailyViewController extends AbstractController {
 
+    private AppointmentRepository appointmentRepository;
+
     @GetMapping
     public AbstractModelAndView home() {
         Set<AppointmentModel> morning = new TreeSet<>();
         Set<AppointmentModel> afternoon = new TreeSet<>();
 
-        loadTestData(morning, afternoon);
+        //        loadTestData(morning, afternoon);
+        loadData(morning, afternoon);
 
         return new DailyViewView(morning, afternoon, LocalDate.now());
+    }
+
+    private void loadData(Set<AppointmentModel> morning, Set<AppointmentModel> afternoon) {
+        LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
+        LocalDateTime noon = startOfDay.plusHours(12);
+        LocalDateTime endOfDay = noon.plusHours(5).plusMinutes(30);
+
+        for (AppointmentModel appointmentModel : appointmentRepository.findByDateBetween(startOfDay, noon.minusMinutes(30))) {
+            morning.add(appointmentModel);
+        }
+
+        for (AppointmentModel appointmentModel : appointmentRepository.findByDateBetween(noon, endOfDay)) {
+            afternoon.add(appointmentModel);
+        }
     }
 
     private void loadTestData(Set<AppointmentModel> morning, Set<AppointmentModel> afternoon) {

@@ -11,5 +11,4 @@ import java.util.List;
 public interface AppointmentRepository extends CrudRepository<AppointmentModel, Long> {
 
     List<AppointmentModel> findByDateBetween(LocalDateTime initial, LocalDateTime end);
-
 }
