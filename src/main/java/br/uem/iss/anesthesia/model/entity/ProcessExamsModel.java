@@ -42,4 +42,13 @@ public class ProcessExamsModel extends DefaultModel{
                 ", exams=" + exams +
                 '}';
     }
+
+    public ProcessExamsModel(boolean approved, ExamModel exams, ProcessModel process) {
+        this.approved = approved;
+        this.exams = exams;
+        this.process = process;
+    }
+
+    public ProcessExamsModel() {
+    }
 }

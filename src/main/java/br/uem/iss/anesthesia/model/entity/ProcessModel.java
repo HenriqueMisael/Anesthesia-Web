@@ -95,4 +95,7 @@ public class ProcessModel extends DefaultModel {
 
     public ProcessModel() {
     }
+    public ProcessModel(Long id) {
+        this.setId(id);
+    }
 }

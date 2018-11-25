@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/exam")
@@ -82,5 +83,18 @@ public class ExamController {
     }
 
 
+    @GetMapping("/find/{id}")
+    @ResponseBody
+    public Optional<ExamModel> getMedicalProcedure(@PathVariable Long id) {
+        try{
+            Optional<ExamModel> exam;
+
+            exam = examRepository.findById(id);
+            return exam;
+        }catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
+            return null;
+        }
+    }
 }
 

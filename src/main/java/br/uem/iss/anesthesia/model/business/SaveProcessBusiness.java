@@ -18,24 +18,28 @@ public class SaveProcessBusiness extends SaveModelBusiness<ProcessModel> {
     private SavePatientBusiness savePatientBusiness;
     private SaveProcessExamBusiness saveProcessExamBusiness;
     @Autowired
-    public SaveProcessBusiness(ProcessRepository processRepository) {
+    public SaveProcessBusiness(ProcessRepository processRepository, SaveDoctorBusiness saveDoctorBusiness, SaveMedicalProcedureBusiness saveMedicalProcedureBusiness, SavePatientBusiness savePatientBusiness, SaveProcessExamBusiness saveProcessExamBusiness) {
         super(processRepository);
-
+        this.saveDoctorBusiness = saveDoctorBusiness;
+        this.saveMedicalProcedureBusiness = saveMedicalProcedureBusiness;
+        this.savePatientBusiness = savePatientBusiness;
+        this.saveProcessExamBusiness = saveProcessExamBusiness;
     }
 
     @Override
     protected void saveDependencies(ProcessModel process) throws BusinessRuleException {
         if(process.getDoctor() != null && (process.getDoctor().getId() == null || process.getDoctor().getId() == 0)){
-            System.out.println("Vai Slavar Doctor");
             saveDoctorBusiness.save(process.getDoctor());
         }
         if(process.getMedicalProcedure() != null && (process.getMedicalProcedure().getId() == null || process.getMedicalProcedure().getId() == 0)){
-            System.out.println("Vai Slavar Medical Procedure");
             saveMedicalProcedureBusiness.save(process.getMedicalProcedure());
         }
         if(process.getPatient() != null && (process.getPatient().getId() == null || process.getPatient().getId() == 0)){
-            System.out.println("Vai Slavar Paciente");
             savePatientBusiness.save(process.getPatient());
+        }
+        int size = process.getProcesexams().size();
+        for(int i = 0; i < size; i++){
+            saveProcessExamBusiness.save(process.getProcesexams().get(i));
         }
     }
 

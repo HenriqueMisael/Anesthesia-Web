@@ -21,7 +21,7 @@
                         <select name="doctor" id="doctor">
                             <option value="">Selecione um Médico</option>
                             <option th:each     ="doctor : ${doctors}"
-                                    th:selected ="${doctor == process.doctor}"
+                                     th:selected ="${doctor == process.doctor}"
                                     th:value    ="${doctor.id}"
                                     th:text     ="${doctor.name}">
                             </option>
@@ -48,6 +48,16 @@
                                     th:value    ="${medicalprocedure.id}"
                                     th:text     ="${medicalprocedure.name}"></option>
                         </select>
+                        <label for="medicalProcedure">Procedimento</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="exam" id="exam">
+                            <option value="">Selecione o Exame Adicional</option>
+                            <option th:each     ="exam : ${exams}"
+                                    th:value    ="${exam.id}"
+                                    th:text     ="${exam.name}"></option>
+                        </select>
+                        <label for="exam">Exames Adicionais</label>
                     </div>
                 </div>
                 <h5>Exames:</h5>
@@ -58,11 +68,12 @@
                             <th>Nome</th>
                             <th>Tempo de Jejum</th>
                             <th>Aprovado</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="processexam : *{procesexams}" th:id="${processexam.id}">
-                            <td><span th:text="${processexam.id}"></span></td>
+                        <tr th:each="processexam,index : *{procesexams}" th:id="${processexam.id}" th:data-index="${index.index+1}">
+                            <td><span th:text="${processexam.exams.getId()}"></span></td>
                             <td th:text="${processexam.exams.getName()}"><span></span></td>
                             <td th:text="${processexam.exams.getJejumTime()}"><span></span></td>
                             <td>
@@ -73,6 +84,7 @@
                                     </label>
                                 </p>
                             </td>
+                            <td class="acoes"><a class="waves-effect waves-light btn remover_exam" th:data-index="${index.index+1}" >Remover</a></td>
                         </tr>
                     </tbody>
                 </table>

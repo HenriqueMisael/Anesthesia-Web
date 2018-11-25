@@ -3,10 +3,7 @@ package br.uem.iss.anesthesia.controller;
 import br.uem.iss.anesthesia.model.business.SaveProcessBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.entity.ProcessModel;
-import br.uem.iss.anesthesia.model.repository.DoctorRepository;
-import br.uem.iss.anesthesia.model.repository.PatientRepository;
-import br.uem.iss.anesthesia.model.repository.ProcessRepository;
-import br.uem.iss.anesthesia.model.repository.MedicalProcedureRepository;
+import br.uem.iss.anesthesia.model.repository.*;
 import br.uem.iss.anesthesia.view.ProcessFormView;
 import br.uem.iss.anesthesia.view.ProcessIndexView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +33,9 @@ public class ProcessController {
     @Autowired
     private MedicalProcedureRepository medicalProcedureRepository;
 
+    @Autowired
+    private ExamRepository examRepository;
+
     @GetMapping
     public ModelAndView listProcess(@RequestParam(value = "filtro_codigo", required = false) String codigo,
                                     @RequestParam(value = "filtro_nome_paciente", required = false) String nome_paciente,
@@ -60,6 +60,8 @@ public class ProcessController {
     @ResponseBody
     public ProcessModel saveProcess(@RequestBody ProcessModel process) {
         try {
+            System.out.println(process);
+            System.out.println(process.getProcesexams());
             saveProcessBusiness.save(process);
             return process;
         } catch (Exception e) {
@@ -86,6 +88,6 @@ public class ProcessController {
 
     private ProcessFormView viewWithMessage(ProcessModel process, String message, String metodo) {
         return new ProcessFormView(metodo, process, message, doctorRepository.findByActiveTrue(), patientRepository.findByActiveTrue(),
-                medicalProcedureRepository.findByActiveTrue());
+                medicalProcedureRepository.findByActiveTrue(), examRepository.findByActiveTrue());
     }
 }
