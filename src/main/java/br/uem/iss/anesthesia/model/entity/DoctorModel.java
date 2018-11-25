@@ -210,4 +210,7 @@ public class DoctorModel extends DefaultModel {
     public DoctorModel(Long id) {
         this.setId(id);
     }
+    public DoctorModel(String name){
+        this.name = name;
+    }
 }

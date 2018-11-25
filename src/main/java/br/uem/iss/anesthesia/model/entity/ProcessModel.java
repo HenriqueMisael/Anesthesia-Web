@@ -1,6 +1,7 @@
 package br.uem.iss.anesthesia.model.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -17,8 +18,7 @@ public class ProcessModel extends DefaultModel {
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<ProcessExamsModel> procesexams;
     private boolean active = true;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar inicialDate;
+    private LocalDate inicialDate;
 
     public String getPacienteMedico(){
         String texto = "Paciente: "+ this.getPatient().getName() + " | Médico: " + this.getDoctor().getName() ;
@@ -41,11 +41,11 @@ public class ProcessModel extends DefaultModel {
         this.patient = patient;
     }
 
-    public Calendar getInicialDate() {
+    public LocalDate getInicialDate() {
         return inicialDate;
     }
 
-    public void setInicialDate(Calendar inicialDate) {
+    public void setInicialDate(LocalDate inicialDate) {
         this.inicialDate = inicialDate;
     }
 

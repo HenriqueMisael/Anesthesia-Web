@@ -2,6 +2,8 @@ package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SaveProcessBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
+import br.uem.iss.anesthesia.model.entity.DoctorModel;
+import br.uem.iss.anesthesia.model.entity.PatientModel;
 import br.uem.iss.anesthesia.model.entity.ProcessModel;
 import br.uem.iss.anesthesia.model.repository.*;
 import br.uem.iss.anesthesia.view.ProcessFormView;
@@ -9,10 +11,9 @@ import br.uem.iss.anesthesia.view.ProcessIndexView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/process")
@@ -37,13 +38,19 @@ public class ProcessController {
     private ExamRepository examRepository;
 
     @GetMapping
-    public ModelAndView listProcess(@RequestParam(value = "filtro_codigo", required = false) String codigo,
-                                    @RequestParam(value = "filtro_nome_paciente", required = false) String nome_paciente,
-                                    @RequestParam(value = "filtro_nome_medico", required = false) String nome_medico) {
+    public ModelAndView listProcess(@RequestParam(value = "filtro_paciente", required = false) PatientModel patient,
+                                    @RequestParam(value = "filtro_medico", required = false) DoctorModel doctor) {
         Iterable<ProcessModel> process;
-
-        process = processRepository.findByActiveTrue();
-        return new ProcessIndexView(process, codigo, nome_paciente, nome_medico);
+        if(doctor != null && patient != null){
+            process = processRepository.findByPatientAndDoctorAndActiveTrue(patient, doctor);
+        }else if (doctor != null){
+            process = processRepository.findByDoctorAndActiveTrue(doctor);
+        }else if(patient != null){
+            process = processRepository.findByPatientAndActiveTrue(patient);
+        }else{
+            process = processRepository.findByActiveTrue();
+        }
+        return new ProcessIndexView(process, doctorRepository.findByActiveTrue(), patientRepository.findByActiveTrue(), doctor, patient);
     }
 
     @GetMapping("/new")
@@ -60,8 +67,7 @@ public class ProcessController {
     @ResponseBody
     public ProcessModel saveProcess(@RequestBody ProcessModel process) {
         try {
-            System.out.println(process);
-            System.out.println(process.getProcesexams());
+            process.setInicialDate(LocalDate.now());
             saveProcessBusiness.save(process);
             return process;
         } catch (Exception e) {
@@ -79,7 +85,7 @@ public class ProcessController {
         } catch (BusinessRuleException e) {
 
         }
-        return new ProcessIndexView(processRepository.findByActiveTrue(), null, null, null);
+        return new ProcessIndexView(processRepository.findByActiveTrue(), null, null, null, null);
     }
 
     private ProcessFormView viewWithoutMessage(ProcessModel process, String metodo) {

@@ -15,17 +15,26 @@
             </div>
             <div class="row">
                 <form th:action="@{/process}" method="get">
-                    <div class="input-field col s2">
-                        <input id="filtro_codigo" name="filtro_codigo" type="text" th:value="${filtro_codigo}">
-                        <label for="filtro_codigo">Código</label>
+                    <div class="input-field col s4">
+                        <select name="filtro_paciente" id="filtro_paciente">
+                            <option value="">Selecione um Paciente</option>
+                            <option th:each     ="patient : ${patients}"
+                                    th:selected ="${patient.id == (filtro_paciente != null ? filtro_paciente.id : null)}"
+                                    th:value    ="${patient.id}"
+                                    th:text     ="${patient.name}"></option>
+                        </select>
+                        <label for="filtro_paciente">Paciente</label>
                     </div>
                     <div class="input-field col s4">
-                        <input id="filtro_nome_paciente" name="filtro_nome_paciente" type="text" th:value="${filtro_nome_paciente}">
-                        <label for="filtro_nome_paciente">Nome Paciente</label>
-                    </div>
-                    <div class="input-field col s4">
-                        <input id="filtro_nome_medico" name="filtro_nome_medico" type="text" th:value="${filtro_nome_medico}">
-                        <label for="filtro_nome_medico">Nome Médico</label>
+                        <select name="filtro_medico" id="filtro_medico">
+                            <option value="">Selecione um Médico</option>
+                            <option th:each     ="doctor : ${doctors}"
+                                    th:selected="${doctor.id == (filtro_medico != null ? filtro_medico.id : null) }"
+                                    th:value    ="${doctor.id}"
+                                    th:text     ="${doctor.name}">
+                            </option>
+                        </select>
+                        <label for="filtro_medico">Médico</label>
                     </div>
                     <div class="col s2">
                         <div class="row">

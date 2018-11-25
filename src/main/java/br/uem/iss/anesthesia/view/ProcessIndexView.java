@@ -1,13 +1,16 @@
 package br.uem.iss.anesthesia.view;
 
+import br.uem.iss.anesthesia.model.entity.DoctorModel;
+import br.uem.iss.anesthesia.model.entity.PatientModel;
 import br.uem.iss.anesthesia.model.entity.ProcessModel;
 
 public class ProcessIndexView extends AbstractModelAndView {
 
-    public ProcessIndexView(Iterable<ProcessModel> process, String codigo, String nome_paciente, String nome_medico) {
+    public ProcessIndexView(Iterable<ProcessModel> process, Iterable<DoctorModel> doctors, Iterable<PatientModel> patients, DoctorModel doctor, PatientModel patient) {
         super("index_process", "process", process);
-        this.addObject("filtro_codigo", codigo);
-        this.addObject("filtro_nome_paciente", nome_paciente);
-        this.addObject("filtro_nome_medico", nome_medico);
+        this.addObject("doctors", doctors);
+        this.addObject("patients", patients);
+        this.addObject("filtro_paciente", patient);
+        this.addObject("filtro_medico", doctor);
     }
 }
