@@ -32,6 +32,13 @@ public class PatientModel extends DefaultModel {
     private Set<MedicineModel> medicines;
     private boolean active = true;
 
+    public PatientModel() {
+    }
+
+    public PatientModel(Long id) {
+        this.setId(id);
+    }
+
     public String getName() {
         return name;
     }
@@ -168,10 +175,6 @@ public class PatientModel extends DefaultModel {
         active = false;
     }
 
-    public void activate() {
-        active = true;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -184,7 +187,7 @@ public class PatientModel extends DefaultModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname());
+        return Objects.hash(getId());
     }
 
     @Override
@@ -221,13 +224,6 @@ public class PatientModel extends DefaultModel {
 
     @Override
     public String toString() {
-        return "Id: "+getId()+getName() + " " + getSurname();
-    }
-
-    public PatientModel(Long id) {
-        this.setId(id);
-    }
-
-    public PatientModel() {
+        return getName() + " " + getSurname();
     }
 }

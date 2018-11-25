@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Visão Gerencial Diária</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb">Visão Gerencial Diária</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h5>Manhã</h5>
+                    <div class="row" th:each="appointment : ${morning}">
+                        <card>
+                            <div class="card white">
+                                <div class="card-content blue-grey-text">
+                                        <span class="card-title"
+                                              th:text="${#temporals.format(appointment.date, 'hh:mm') + ' ' + appointment.process.doctor.name}"></span>
+                                    <p th:text="${appointment.process.patient}"></p>
+                                </div>
+                            </div>
+                        </card>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <h5>Tarde</h5>
+                    <div class="row" th:each="appointment : ${afternoon}">
+                        <card>
+                            <div class="card white">
+                                <div class="card-content blue-grey-text">
+                                        <span class="card-title"
+                                              th:text="${#temporals.format(appointment.date, 'HH:mm') + ' ' + appointment.process.doctor.name}"></span>
+                                    <p th:text="${appointment.process.patient}"></p>
+                                </div>
+                            </div>
+                        </card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

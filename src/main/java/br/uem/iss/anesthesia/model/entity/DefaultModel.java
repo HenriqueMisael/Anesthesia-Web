@@ -6,11 +6,14 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @MappedSuperclass
-public class DefaultModel implements Serializable, Cloneable {
+public class DefaultModel implements Serializable, Cloneable, Comparable {
 
     @Id
     @GeneratedValue
     private Long id;
+
+    public DefaultModel() {
+    }
 
     public Long getId() {
         return id;
@@ -31,6 +34,8 @@ public class DefaultModel implements Serializable, Cloneable {
         return id == null;
     }
 
-    public DefaultModel() {
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
