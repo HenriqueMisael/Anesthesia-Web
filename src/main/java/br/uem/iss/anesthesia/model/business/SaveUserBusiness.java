@@ -2,6 +2,7 @@ package br.uem.iss.anesthesia.model.business;
 
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.business.validator.NameNotNullValidator;
+import br.uem.iss.anesthesia.model.business.validator.NameNotNumbersValidator;
 import br.uem.iss.anesthesia.model.entity.UserModel;
 import br.uem.iss.anesthesia.model.repository.MedicalProcedureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class SaveUserBusiness extends SaveModelBusiness<UserModel> {
 
     private NameNotNullValidator nameNotNullValidator;
+    private NameNotNumbersValidator nameNotNumbersValidator;
 
     @Autowired
     public SaveUserBusiness(MedicalProcedureRepository repository, NameNotNullValidator nameNotNullValidator) {
@@ -26,5 +28,6 @@ public class SaveUserBusiness extends SaveModelBusiness<UserModel> {
     protected void validateFields(UserModel model) throws BusinessRuleException {
         nameNotNullValidator.validate(model.getLogin());
         nameNotNullValidator.validate(model.getPassword());
+        nameNotNumbersValidator.validate(model.getLogin());
     }
 }
