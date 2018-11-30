@@ -61,7 +61,7 @@ public class PatientsController extends AbstractController {
     }
 
     @PostMapping
-    public ModelAndView savePatient(@Valid PatientModel patient) {
+    public ModelAndView savePatient(PatientModel patient) {
         try {
             savePatientBusiness.save(patient);
             return listPatients(null, null);

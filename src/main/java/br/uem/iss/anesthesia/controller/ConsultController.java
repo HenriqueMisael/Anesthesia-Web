@@ -1,5 +1,6 @@
 package br.uem.iss.anesthesia.controller;
 
+import br.uem.iss.anesthesia.controller.request.AppointmentRequest;
 import br.uem.iss.anesthesia.model.business.SaveConsultBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.entity.*;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/consult")
@@ -46,7 +49,7 @@ public class ConsultController extends AbstractController {
         return new ConsultFormView(consult,process);
     }
 
-    private ConsultFormView viewWithMessage(AppointmentModel consult, String message) {
+    private ConsultFormView viewWithMessage(AppointmentRequest consult, String message) {
 
         Iterable<ProcessModel> process = processRepository.findAll();
         return new ConsultFormView(consult,process);
@@ -63,13 +66,20 @@ public class ConsultController extends AbstractController {
     }
 
     @PostMapping
-    public ModelAndView saveConsult(@Valid AppointmentModel consult) {
+    public ModelAndView saveConsult(@Valid AppointmentRequest appointmentRequest) {
         System.out.println("ENTROU NO CONTROLE");
         try {
+            AppointmentModel consult = new AppointmentModel();
+
+            consult.setActive(appointmentRequest.isActive());
+            consult.setDate(appointmentRequest.getDate().atTime(LocalTime.parse(appointmentRequest.getHour(), DateTimeFormatter.ofPattern("HH:mm"))));
+            consult.setProcess(appointmentRequest.getProcess());
+            consult.setId(appointmentRequest.getId());
+
             saveConsultBusiness.save(consult);
             return listConsult(null,null,null,null);
         } catch (BusinessRuleException e) {
-            return viewWithMessage(consult, e.getMessage());
+            return viewWithMessage(appointmentRequest, e.getMessage());
         }
     }
 
