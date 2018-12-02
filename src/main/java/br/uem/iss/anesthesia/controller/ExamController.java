@@ -1,25 +1,15 @@
 package br.uem.iss.anesthesia.controller;
 
 import br.uem.iss.anesthesia.model.business.SaveExamBusiness;
-import br.uem.iss.anesthesia.model.business.SaveProcessBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
-import br.uem.iss.anesthesia.model.entity.DoctorModel;
 import br.uem.iss.anesthesia.model.entity.ExamModel;
 import br.uem.iss.anesthesia.model.repository.ExamRepository;
-import br.uem.iss.anesthesia.view.DoctorFormView;
-import br.uem.iss.anesthesia.view.DoctorIndexView;
 import br.uem.iss.anesthesia.view.ExamFormView;
 import br.uem.iss.anesthesia.view.ExamIndexView;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import sun.awt.resources.awt_es;
 
 import javax.validation.Valid;
 import java.util.Optional;

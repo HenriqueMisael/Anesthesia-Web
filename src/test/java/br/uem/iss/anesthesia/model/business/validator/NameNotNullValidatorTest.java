@@ -15,7 +15,7 @@ public class NameNotNullValidatorTest {
     private NameNotNullValidator nameNotNullValidator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initMocks(this);
     }
 

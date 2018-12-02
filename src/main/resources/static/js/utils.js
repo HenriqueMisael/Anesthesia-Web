@@ -2,7 +2,7 @@ deletaInputHiddenCheckbox();
 ativaBtnDelete();
 
 document.addEventListener('DOMContentLoaded', function () {
-    M.Tooltip.init(document.querySelectorAll('.tooltipped'), {position: 'top'})
+    M.Tooltip.init(document.querySelectorAll('.tooltipped'), {position: 'top'});
     M.Modal.init(document.querySelectorAll('.modal'), null);
     M.FormSelect.init(document.querySelectorAll('select'), {});
     ativaDatePicker();

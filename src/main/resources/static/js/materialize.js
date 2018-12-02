@@ -1064,7 +1064,6 @@ function _classCallCheck(instance, Constructor) {
 
     return cash;
 });
-;
 var Component = function () {
     /**
      * Generic constructor for all components
@@ -1119,7 +1118,8 @@ var Component = function () {
     return Component;
 }();
 
-; // Required for Meteor package, the use of window prevents export by Meteor
+
+ // Required for Meteor package, the use of window prevents export by Meteor
 (function (window) {
     if (window.Package) {
         M = {};
@@ -1526,7 +1526,6 @@ M.throttle = function (func, wait, options) {
         return result;
     };
 };
-;
 /*
   v2.2.0
   2017 Julian Garnier
@@ -2314,7 +2313,7 @@ var $jscomp$this = this;
     };
     return q;
 });
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -2641,7 +2640,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Collapsible, 'collapsible', 'M_Collapsible');
     }
 })(cash, M.anime);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -3288,7 +3287,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Dropdown, 'dropdown', 'M_Dropdown');
     }
 })(cash, M.anime);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -3727,7 +3726,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Modal, 'modal', 'M_Modal');
     }
 })(cash, M.anime);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -4230,7 +4229,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Materialbox, 'materialbox', 'M_Materialbox');
     }
 })(cash, M.anime);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -4393,7 +4392,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Parallax, 'parallax', 'M_Parallax');
     }
 })(cash);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -4859,7 +4858,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Tabs, 'tabs', 'M_Tabs');
     }
 })(cash, M.anime);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -5200,7 +5199,6 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Tooltip, 'tooltip', 'M_Tooltip');
     }
 })(cash, M.anime);
-;
 /*!
   * Waves v0.6.4
   * http://fian.my.id/Waves
@@ -5210,7 +5208,7 @@ var $jscomp$this = this;
   * https://github.com/fians/Waves/blob/master/LICENSE
   */
 
-;(function (window) {
+(function (window) {
     'use strict';
 
     var Waves = Waves || {};
@@ -5534,7 +5532,7 @@ var $jscomp$this = this;
         Waves.displayEffect();
     }, false);
 })(window);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -5885,7 +5883,7 @@ var $jscomp$this = this;
         return new Toast(options);
     };
 })(cash, M.anime);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -6530,7 +6528,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Sidenav, 'sidenav', 'M_Sidenav');
     }
 })(cash, M.anime);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -6848,7 +6846,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(ScrollSpy, 'scrollSpy', 'M_ScrollSpy');
     }
 })(cash, M.anime);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -7342,7 +7340,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Autocomplete, 'autocomplete', 'M_Autocomplete');
     }
 })(cash);
-;(function ($) {
+(function ($) {
     // Function to update labels of text fields
     M.updateTextFields = function () {
         var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], input[type=date], input[type=time], textarea';
@@ -7549,7 +7547,7 @@ var $jscomp$this = this;
                 $this.one('blur', function (e) {
                     $(this).removeClass('tabbed');
                 });
-                return;
+
             }
         });
 
@@ -7586,7 +7584,7 @@ var $jscomp$this = this;
         });
     }); // End of $(document).ready
 })(cash);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -8000,7 +7998,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Slider, 'slider', 'M_Slider');
     }
 })(cash, M.anime);
-;(function ($, anim) {
+(function ($, anim) {
     $(document).on('click', '.card', function (e) {
         if ($(this).children('.card-reveal').length) {
             var $card = $(e.target).closest('.card');
@@ -8034,7 +8032,7 @@ var $jscomp$this = this;
         }
     });
 })(cash, M.anime);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -8588,7 +8586,7 @@ var $jscomp$this = this;
         });
     });
 })(cash);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -8754,7 +8752,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Pushpin, 'pushpin', 'M_Pushpin');
     }
 })(cash);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {
@@ -9153,7 +9151,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(FloatingActionButton, 'floatingActionButton', 'M_FloatingActionButton');
     }
 })(cash, M.anime);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -10078,7 +10076,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Datepicker, 'datepicker', 'M_Datepicker');
     }
 })(cash);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -10715,7 +10713,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Timepicker, 'timepicker', 'M_Timepicker');
     }
 })(cash);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {};
@@ -10885,7 +10883,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(CharacterCounter, 'characterCounter', 'M_CharacterCounter');
     }
 })(cash);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -11672,7 +11670,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(Carousel, 'carousel', 'M_Carousel');
     }
 })(cash);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -12026,7 +12024,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(TapTarget, 'tapTarget', 'M_TapTarget');
     }
 })(cash);
-;(function ($) {
+(function ($) {
     'use strict';
 
     var _defaults = {
@@ -12492,7 +12490,7 @@ var $jscomp$this = this;
         M.initializeJqueryWrapper(FormSelect, 'formSelect', 'M_FormSelect');
     }
 })(cash);
-;(function ($, anim) {
+(function ($, anim) {
     'use strict';
 
     var _defaults = {};

@@ -22,7 +22,7 @@ public class CpfValidatorTest {
     private CpfValidator cpfValidator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initMocks(this);
     }
 

@@ -15,7 +15,7 @@ public class SurnameNotNullValidatorTest {
     private SurnameNotNullValidator surnameNotNullValidator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initMocks(this);
     }
 

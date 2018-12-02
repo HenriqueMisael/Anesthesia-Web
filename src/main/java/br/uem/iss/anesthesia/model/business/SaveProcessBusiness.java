@@ -44,6 +44,6 @@ public class SaveProcessBusiness extends SaveModelBusiness<ProcessModel> {
     }
 
     @Override
-    protected void validateFields(ProcessModel model) throws NullContentNotAllowedException {
+    protected void validateFields(ProcessModel model) {
     }
 }
