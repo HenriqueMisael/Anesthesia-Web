@@ -12,9 +12,11 @@ public class ConsultFormView extends AbstractModelAndView {
         this.addObject("message", consults);
         this.addObject("metodo", "Adicionar ");
         this.addObject("medicalprocedures",process);
+        this.addObject("process",consults.getProcess());
         this.addObject("date", consults.getDate());
         this.addObject("hour", consults.getHour());
         this.addObject("timeConsult", timeConsult);
         this.addObject("metodo", "Adicionar ");
+
     }
 }
