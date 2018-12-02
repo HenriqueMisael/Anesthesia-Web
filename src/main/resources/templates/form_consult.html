@@ -36,12 +36,12 @@
 
                 <div class="row">
                     <div class="input-field col s6">
-                        <select name="medicalProcedure" id="medicalProcedure">
-                            <option value="">Selecione um Procedimento</option>
-                            <option th:each     ="medicalprocedure : ${medicalprocedures}"
-                                    th:selected ="${medicalprocedure == process}"
-                                    th:value    ="${medicalprocedure}"
-                                    th:text     ="${medicalprocedure.getPacienteMedico()}"></option>
+                        <select name="hour" id="hour">
+                            <option value="">Selecione o horário da consulta</option>
+                            <option th:each     ="timeConsult : ${timeConsult}"
+                                    th:selected ="${hour == hour}"
+                                    th:value    ="${timeConsult}"
+                                    th:text     ="${timeConsult}"></option>
                         </select>
 
                     </div>

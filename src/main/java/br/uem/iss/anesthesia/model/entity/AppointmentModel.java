@@ -42,6 +42,8 @@ public class AppointmentModel extends DefaultModel {
         this.active = active;
     }
 
+
+
     @Override
     public int compareTo(Object o) {
         if (o.getClass().equals(getClass())) {
@@ -49,4 +51,6 @@ public class AppointmentModel extends DefaultModel {
         }
         return super.compareTo(o);
     }
+
+
 }

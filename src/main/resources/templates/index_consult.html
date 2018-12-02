@@ -23,10 +23,7 @@
                         <input id="codigo" name="codigo" type="text">
                         <label for="codigo">Código</label>
                     </div>
-                    <div class="input-field col s8">
-                        <input id="name" name="name" type="text">
-                        <label for="name">Número</label>
-                    </div>
+
                     <div class="col s1">
                         <div class="row">
                             <div class="col s6">
@@ -45,7 +42,7 @@
                 <thead>
                 <tr>
                     <th>Código</th>
-                    <th>Número</th>
+                    <th>Data</th>
                     <th><a href="/consult/new" class="btn-floating btn-small waves-effect waves-light blue"><i
                             class="material-icons">add</i></a>
                     </th>
@@ -54,6 +51,7 @@
                 <tbody>
                 <tr th:each="consult : ${consult}">
                     <td><span th:text="${consult.id}"></span></td>
+                    <td><span th:text="${consult.getDate().toString()}"></span></td>
                     <td>
                         <a class="btn-floating btn-small waves-effect waves-light blue delete"
                            th:data-url="${(#mvc.url('CC#deleteConsult').arg(0, consult.id)).build()}"><i
