@@ -182,12 +182,23 @@ public class PatientModel extends DefaultModel {
         if (!(o instanceof PatientModel))
             return false;
         PatientModel that = (PatientModel) o;
-        return Objects.equals(getName(), that.getName()) && Objects.equals(getSurname(), that.getSurname());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+        return isActive() == that.isActive() &&
+                Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getSurname(), that.getSurname()) &&
+                getGender() == that.getGender() &&
+                Objects.equals(getBirthday(), that.getBirthday()) &&
+                Objects.equals(getReligion(), that.getReligion()) &&
+                getCivilState() == that.getCivilState() &&
+                Objects.equals(getCity(), that.getCity()) &&
+                Objects.equals(getPostalCode(), that.getPostalCode()) &&
+                Objects.equals(getAddress(), that.getAddress()) &&
+                Objects.equals(getPhoneNumber(), that.getPhoneNumber()) &&
+                Objects.equals(getCellphoneNumber(), that.getCellphoneNumber()) &&
+                Objects.equals(getEmail(), that.getEmail()) &&
+                Objects.equals(getCpf(), that.getCpf()) &&
+                Objects.equals(getRg(), that.getRg()) &&
+                Objects.equals(getBackgrounds(), that.getBackgrounds()) &&
+                Objects.equals(getMedicines(), that.getMedicines());
     }
 
     @Override

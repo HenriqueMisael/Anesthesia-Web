@@ -8,7 +8,7 @@ public class ConsultIndexView extends AbstractModelAndView {
         super("index_consult", "consult", consults);
         this.addObject("filtro_number", number);
         this.addObject("filtro_ativo", codigo);
-        this.addObject("filtro_nome_paciente", nome_paciente);
+        this.addObject("nome_paciente", nome_paciente);
         this.addObject("filtro_nome_medico", nome_medico);
     }
 }

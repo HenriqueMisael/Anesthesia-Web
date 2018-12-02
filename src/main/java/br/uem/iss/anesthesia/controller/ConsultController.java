@@ -1,5 +1,6 @@
 package br.uem.iss.anesthesia.controller;
 
+import br.uem.iss.anesthesia.controller.request.AppointmentRequest;
 import br.uem.iss.anesthesia.model.business.SaveConsultBusiness;
 import br.uem.iss.anesthesia.model.business.exception.BusinessRuleException;
 import br.uem.iss.anesthesia.model.entity.*;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/consult")
@@ -26,7 +30,18 @@ public class ConsultController extends AbstractController {
     private SaveConsultBusiness saveConsultBusiness;
 
 
-
+    public ArrayList<String> timeConsult(){
+        ArrayList<String> timeConsult = new ArrayList<>() ;
+        timeConsult.add("08:00");
+        timeConsult.add("09:00");
+        timeConsult.add("10:00");
+        timeConsult.add("11:00");
+        timeConsult.add("13:00");
+        timeConsult.add("14:00");
+        timeConsult.add("15:00");
+        timeConsult.add("16:00");
+        return timeConsult;
+    }
 
 
     @GetMapping
@@ -43,13 +58,18 @@ public class ConsultController extends AbstractController {
 
     private ConsultFormView viewWithoutMessage(AppointmentModel consult ) {
         Iterable<ProcessModel> process = processRepository.findAll();
-        return new ConsultFormView(consult,process);
+        AppointmentRequest appointmentRequest = new AppointmentRequest();
+        appointmentRequest.setActive(appointmentRequest.isActive());
+        //appointmentRequest.setDate(consult.getDate().toLocalDate());
+        appointmentRequest.setProcess(consult.getProcess());
+
+        return new ConsultFormView(appointmentRequest,process,timeConsult());
     }
 
-    private ConsultFormView viewWithMessage(AppointmentModel consult, String message) {
+    private ConsultFormView viewWithMessage(AppointmentRequest consult, String message) {
 
         Iterable<ProcessModel> process = processRepository.findAll();
-        return new ConsultFormView(consult,process);
+        return new ConsultFormView(consult,process,timeConsult());
     }
 
     @GetMapping("/new")
@@ -59,17 +79,31 @@ public class ConsultController extends AbstractController {
 
     @GetMapping("/{id}")
     public ModelAndView editConsult(@PathVariable Long id) {
+        AppointmentModel appointmentModel = new AppointmentModel();
         return viewWithoutMessage(consultRepository.findById(id).get());
     }
 
     @PostMapping
-    public ModelAndView saveConsult(@Valid AppointmentModel consult) {
+    public ModelAndView saveConsult(@Valid AppointmentRequest appointmentRequest) {
         System.out.println("ENTROU NO CONTROLE");
         try {
+            System.out.println("Hora: "+ appointmentRequest.getHour());
+            System.out.println("Data: "+ appointmentRequest.getDate().toString());
+
+            AppointmentModel consult = new AppointmentModel();
+
+            consult.setActive(appointmentRequest.isActive());
+            consult.setDate(appointmentRequest.getDate().atTime(LocalTime.parse(appointmentRequest.getHour(), DateTimeFormatter.ofPattern("HH:mm"))));
+            consult.setProcess(appointmentRequest.getProcess());
+            consult.setId(appointmentRequest.getId());
+
+
             saveConsultBusiness.save(consult);
             return listConsult(null,null,null,null);
         } catch (BusinessRuleException e) {
-            return viewWithMessage(consult, e.getMessage());
+            return viewWithMessage(appointmentRequest, e.getMessage());
+
+
         }
     }
 

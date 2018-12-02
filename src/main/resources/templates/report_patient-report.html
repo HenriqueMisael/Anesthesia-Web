@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Ficha de Paciente</title>
+    <title>Relatório de Pacientes</title>
     <style>
         h1 {
             color: #0D47A1;
@@ -25,13 +24,25 @@
             color: #0D47A1;
             font-family: Calibri;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 14px;
         }
 
         tr > td {
             color: black;
             font-family: Times;
-            font-size: 28px;
+            font-size: 16px;
+        }
+
+        tr > td:nth-child(1) {
+            width: 250px;
+        }
+
+        tr > td:nth-child(2) {
+            width: 250px;
+        }
+
+        tr > td:nth-child(3) {
+            width: 150px;
         }
     </style>
 </head>
@@ -42,13 +53,15 @@
 <table>
     <thead>
     <tr>
+        <th>Nome do Médico</th>
         <th>Nome do Paciente</th>
         <th>Data da Consulta</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="appointment : ${appointments}">
-        <td><span th:text="${appointment.patient.name + ' ' + appointment.patient.surname}"></span></td>
+        <td><span th:text="${appointment.process.doctor.name    }"></span></td>
+        <td><span th:text="${appointment.process.patient.name + ' ' + appointment.process.patient.surname}"></span></td>
         <td><span th:text="${#temporals.format(appointment.date, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
     </tr>
     </tbody>
