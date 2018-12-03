@@ -2,7 +2,7 @@ package br.uem.iss.anesthesia.controller.request;
 
 import br.uem.iss.anesthesia.model.entity.AppointmentModel;
 import br.uem.iss.anesthesia.model.entity.ProcessModel;
-import com.sun.deploy.ref.AppModel;
+//import com.sun.deploy.ref.AppModel;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

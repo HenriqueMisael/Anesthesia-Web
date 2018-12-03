@@ -27,7 +27,7 @@ public class SaveUserBusiness extends SaveModelBusiness<UserModel> {
     @Override
     protected void validateFields(UserModel model) throws BusinessRuleException {
         nameNotNullValidator.validate(model.getLogin());
-        nameNotNullValidator.validate(model.getPassword());
         nameNotNumbersValidator.validate(model.getLogin());
+        nameNotNullValidator.validate(model.getPassword());
     }
 }

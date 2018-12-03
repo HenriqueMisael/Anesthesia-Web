@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="corpo">
+    <div class="container">
+        <div class="row">
+            <h2 class="center">Relatório de Ausências</h2>
+            <div class="row">
+                <nav>
+                    <div class="nav-wrapper blue darken-1">
+                        <div class="col s12">
+                            <a class="breadcrumb" th:href="@{/}">Home</a>
+                            <a class="breadcrumb" th:href="@{/report/}">Relatórios</a>
+                            <a class="breadcrumb">Relatório de Ausências</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <form method="post" th:object="${filter}">
+                    <div class="input-field col s2">
+                        <input id="initial" th:field="*{initial}" type="text" class="datepicker">
+                        <label for="initial">Data Inicial</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input id="end" th:field="*{end}" type="text" class="datepicker">
+                        <label for="end">Data Final</label>
+                    </div>
+                    <div class="col s1">
+                        <button target="_blank" type="submit"
+                                class="btn-floating btn-large waves-effect waves-light blue"><i
+                                class="material-icons">done</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table >
+            <thead>
+            <tr >
+                <th>Código</th>
+                <th>Médico</th>
+                <th>Paciente</th>
+                <th>Data Inicial</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="process : ${process}">
+                <td th:text="${process.id}"><span></span></td>
+                <td th:text="${process.doctor.getName()}"><span></span></td>
+                <td th:text="${process.patient.getName()}"><span></span></td>
+                <td th:text="${process.inicialDate}"><span></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>
