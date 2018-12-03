@@ -18,10 +18,10 @@ public class SaveProcessExamBusiness extends SaveModelBusiness<ProcessExamsModel
     }
 
     @Override
-    protected void saveDependencies(ProcessExamsModel model) throws BusinessRuleException {
+    protected void saveDependencies(ProcessExamsModel model) {
     }
 
     @Override
-    protected void validateFields(ProcessExamsModel model) throws NullContentNotAllowedException {
+    protected void validateFields(ProcessExamsModel model) {
     }
 }

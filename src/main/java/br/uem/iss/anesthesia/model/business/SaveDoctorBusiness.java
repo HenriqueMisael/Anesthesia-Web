@@ -19,7 +19,7 @@ public class SaveDoctorBusiness extends SaveModelBusiness<DoctorModel> {
     }
 
     @Override
-    protected void saveDependencies(DoctorModel model) throws BusinessRuleException {
+    protected void saveDependencies(DoctorModel model) {
 
     }
 

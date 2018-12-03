@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class AppointmentRequest {
 
-    private ProcessModel process;
+    public ProcessModel process;
     private LocalDate date;
     private String hour;
     private boolean active;

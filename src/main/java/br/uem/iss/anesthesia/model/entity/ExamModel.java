@@ -9,7 +9,7 @@ public class ExamModel extends DefaultModel{
     private String name;
     private String description;
     private int jejumTime;
-    private boolean active;
+    public boolean active;
 
 
     public ExamModel(Long id){

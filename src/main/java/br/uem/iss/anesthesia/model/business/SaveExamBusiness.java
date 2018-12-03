@@ -23,7 +23,7 @@ public class SaveExamBusiness extends SaveModelBusiness<ExamModel> {
     }
 
     @Override
-    protected void saveDependencies(ExamModel model) throws BusinessRuleException {
+    protected void saveDependencies(ExamModel model) {
 
     }
 

@@ -14,5 +14,7 @@ public interface AppointmentRepository extends CrudRepository<AppointmentModel, 
 
     List<AppointmentModel> findByDateBetween(LocalDateTime initial, LocalDateTime end);
 
+    List<AppointmentModel> findByActiveTrue();
+
     List<AppointmentModel> findByDateBetweenAndProcessIn(LocalDateTime initial, LocalDateTime end, Iterable<ProcessModel> byDoctor);
 }
